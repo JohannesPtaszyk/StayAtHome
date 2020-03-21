@@ -3,16 +3,14 @@ package org.wirvsvirushackathon.stayathome.data;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
 public class PointsSharedPreferencesDataSource implements PointsDataSource {
 
-    public static final String PREFERENCE_NAME = "points_preferences";
-    public static final String KEY_POINTS = "KEY_POINTS";
+    private static final String KEY_POINTS = "KEY_POINTS";
 
 
-    SharedPreferences preferences;
+    private SharedPreferences preferences;
 
     public PointsSharedPreferencesDataSource(Context context) {
         this.preferences = PreferenceManager.getDefaultSharedPreferences(context);

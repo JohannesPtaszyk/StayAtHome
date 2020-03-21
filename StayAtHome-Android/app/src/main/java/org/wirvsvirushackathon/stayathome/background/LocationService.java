@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
-import org.wirvsvirushackathon.stayathome.R;
 
 public class LocationService extends Service {
 
