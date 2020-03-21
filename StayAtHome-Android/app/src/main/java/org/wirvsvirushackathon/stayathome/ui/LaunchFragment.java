@@ -1,4 +1,4 @@
-package org.wirvsvirushackathon.stayathome;
+package org.wirvsvirushackathon.stayathome.ui;
 
 import android.os.Bundle;
 
@@ -11,6 +11,8 @@ import androidx.navigation.NavigatorProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import org.wirvsvirushackathon.stayathome.R;
 
 public class LaunchFragment extends Fragment {
 

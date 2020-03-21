@@ -1,4 +1,4 @@
-package org.wirvsvirushackathon.stayathome;
+package org.wirvsvirushackathon.stayathome.ui;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import org.wirvsvirushackathon.stayathome.R;
 
 public class HomeFragment extends Fragment {
 

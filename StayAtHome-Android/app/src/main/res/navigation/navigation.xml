@@ -7,12 +7,12 @@
 
 	<fragment
 		android:id = "@+id/homeScreenFragment"
-		android:name = "org.wirvsvirushackathon.stayathome.HomeFragment"
+		android:name = "org.wirvsvirushackathon.stayathome.ui.HomeFragment"
 		android:label = "fragment_home_screen"
 		tools:layout = "@layout/fragment_home" />
 	<fragment
 		android:id = "@+id/launchFragment"
-		android:name = "org.wirvsvirushackathon.stayathome.LaunchFragment"
+		android:name = "org.wirvsvirushackathon.stayathome.ui.LaunchFragment"
 		android:label = "fragment_launch"
 		tools:layout = "@layout/fragment_launch" >
 		<action
