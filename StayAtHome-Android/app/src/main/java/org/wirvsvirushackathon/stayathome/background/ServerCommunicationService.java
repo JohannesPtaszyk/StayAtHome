@@ -46,24 +46,24 @@ public class ServerCommunicationService extends Service  {
         return retrofit;
     }
 
+    
+
     @Override
     public void onCreate() {
         super.onCreate();
 
         this.getRetrofitInstance();
 
-
         RestDBInterface dbInterface = retrofit.create(RestDBInterface.class);
         Call<List<User>> userGetCall =  dbInterface.getUsers();
+
+
         userGetCall.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
 
                 if(!response.isSuccessful()) {
-                    System.out.println("RETROFIT ERROR");
-                    System.out.println(response.message());
-                    System.out.println((response.errorBody()));
-                    System.out.println(response.toString());
+                    //TODO: Error Handling
                     return;
                 }
 
@@ -77,6 +77,7 @@ public class ServerCommunicationService extends Service  {
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
+                //TODO: Error Handling
                 System.out.println("RETROFIT_FAIL");
             }
         });
