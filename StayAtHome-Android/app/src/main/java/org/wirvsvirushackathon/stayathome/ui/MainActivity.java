@@ -4,14 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
-import android.app.Notification;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 
 import org.wirvsvirushackathon.stayathome.R;
-import org.wirvsvirushackathon.stayathome.background.LocationService;
+import org.wirvsvirushackathon.stayathome.background.BackgroundService;
 
 /**
  * Container for our screens
@@ -33,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(Build.VERSION.SDK_INT >= 26) {
-            startForegroundService(new Intent(this, LocationService.class));
+            startForegroundService(new Intent(this, BackgroundService.class));
         } else {
-            startService(new Intent(this, LocationService.class));
+            startService(new Intent(this, BackgroundService.class));
         }
     }
 

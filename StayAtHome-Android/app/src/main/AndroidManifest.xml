@@ -23,7 +23,7 @@
 			</intent-filter>
 		</activity>
 
-		<service android:name = ".background.LocationService" />
+		<service android:name = ".background.BackgroundService" />
         <service android:name=".background.WifiIdentificationService" />
     </application>
 
