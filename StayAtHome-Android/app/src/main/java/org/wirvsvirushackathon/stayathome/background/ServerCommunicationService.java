@@ -63,7 +63,7 @@ public class ServerCommunicationService extends Service  {
         //TODO: implement
     }
 
-    public static void CreateUser(string email){
+    public static void CreateUser(String email){
         //TODO: implement
     }
 

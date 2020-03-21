@@ -1,5 +1,7 @@
 package org.wirvsvirushackathon.stayathome.ui;
 
+import android.icu.text.CompactDecimalFormat;
+import android.icu.text.NumberFormat;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 
 import org.wirvsvirushackathon.stayathome.R;
 import org.wirvsvirushackathon.stayathome.data.PointsSharedPreferencesDataSource;
+
+import java.util.Locale;
 
 public class HomeFragment extends Fragment {
 

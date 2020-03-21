@@ -8,12 +8,17 @@
 
 	<TextView
 		android:id = "@+id/tv_points"
-		android:layout_width = "wrap_content"
-		android:layout_height = "wrap_content"
+		android:layout_width = "match_parent"
+		android:layout_height = "100dp"
+		android:gravity="center"
 		app:layout_constraintBottom_toBottomOf = "parent"
 		app:layout_constraintEnd_toEndOf = "parent"
 		app:layout_constraintStart_toStartOf = "parent"
 		app:layout_constraintTop_toTopOf = "parent"
-		tools:text="234234"/>
+		android:textStyle="bold"
+		app:autoSizeTextType="uniform"
+		app:autoSizeStepGranularity="1sp"
+		android:padding="8dp"
+		/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
