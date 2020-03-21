@@ -25,7 +25,9 @@ public class LaunchFragment extends Fragment {
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-       final View root = inflater.inflate(R.layout.fragment_launch, container, false);
+        ((MainActivity) requireActivity()).hideNavbar();
+
+        final View root = inflater.inflate(R.layout.fragment_launch, container, false);
        root.findViewById(R.id.btn_start).setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {

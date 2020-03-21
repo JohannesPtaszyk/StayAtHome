@@ -28,8 +28,6 @@ public class UserFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         final View root = inflater.inflate(R.layout.fragment_user, container, false);
-        MaterialButton button = root.findViewById(R.id.btn_users);
-        button.setOnClickListener(v -> Navigation.findNavController(root).navigate(R.id.action_homeScreenFragment_to_userFragment));
         return root;
     }
 }

@@ -2,12 +2,17 @@ package org.wirvsvirushackathon.stayathome.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.wirvsvirushackathon.stayathome.R;
 import org.wirvsvirushackathon.stayathome.background.BackgroundService;
@@ -36,6 +41,20 @@ public class MainActivity extends AppCompatActivity {
         } else {
             startService(new Intent(this, BackgroundService.class));
         }
+
+        BottomNavigationView navView = findViewById(R.id.bottom_navigation);
+        NavHostFragment navHostFragment = (NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+
+        assert navHostFragment != null;
+        NavigationUI.setupWithNavController(navView, navHostFragment.getNavController());
+    }
+
+    public void hideNavbar() {
+        findViewById(R.id.bottom_navigation).setVisibility(View.GONE);
+    }
+
+    public void showNavbar() {
+        findViewById(R.id.bottom_navigation).setVisibility(View.VISIBLE);
     }
 
 }

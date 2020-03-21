@@ -25,6 +25,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        ((MainActivity) requireActivity()).showNavbar();
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_home,
                                 container,

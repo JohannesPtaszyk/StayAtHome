@@ -2,17 +2,14 @@
 <navigation xmlns:android = "http://schemas.android.com/apk/res/android"
 	xmlns:app = "http://schemas.android.com/apk/res-auto"
 	xmlns:tools = "http://schemas.android.com/tools"
-	android:id = "@+id/navigation.xml"
+	android:id = "@+id/navigation"
 	app:startDestination = "@id/launchFragment">
 
 	<fragment
-		android:id = "@+id/homeScreenFragment"
+		android:id = "@+id/homeFragment"
 		android:name = "org.wirvsvirushackathon.stayathome.ui.HomeFragment"
 		android:label = "fragment_home_screen"
 		tools:layout = "@layout/fragment_home" >
-		<action
-			android:id = "@+id/action_homeScreenFragment_to_userFragment"
-			app:destination = "@id/userFragment" />
 	</fragment>
 	<fragment
 		android:id = "@+id/launchFragment"
@@ -21,7 +18,9 @@
 		tools:layout = "@layout/fragment_launch" >
 		<action
 			android:id = "@+id/action_launchFragment_to_homeScreenFragment"
-			app:destination = "@id/homeScreenFragment" />
+			app:destination = "@id/homeFragment"
+			app:popUpTo="@+id/navigation"
+			app:popUpToInclusive="true" />
 	</fragment>
 	<fragment
 		android:id = "@+id/userFragment"
