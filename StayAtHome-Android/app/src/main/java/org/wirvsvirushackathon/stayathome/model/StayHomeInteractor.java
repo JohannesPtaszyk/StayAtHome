@@ -8,44 +8,40 @@ import android.os.Bundle;
 
 import androidx.annotation.RequiresPermission;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class StayHomeInteractor implements LocationListener {
 
-    private List<Callback> callbacks = new ArrayList<>();
+    private static final int MIN_DISTANCE = 2;
+
+    private final HomeWifiManager homeWifiManager;
+    private Location lastLocation;
 
     @RequiresPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-    public StayHomeInteractor(LocationManager locationManager) {
+    public StayHomeInteractor(LocationManager locationManager, HomeWifiManager homeWifiManager) {
+        this.homeWifiManager = homeWifiManager;
         locationManager.requestLocationUpdates(
                 LocationManager.GPS_PROVIDER,
-                500,
-                0,
+                TimeUnit.MINUTES.toMillis(5),
+                MIN_DISTANCE,
                 this
         );
     }
 
-    public void addCallback(Callback callback) {
-        callbacks.add(callback);
+    public boolean isUserAtHome() {
+        return isLastLocationHome() || homeWifiManager.isConnectedToHomeWifi();
     }
 
-    public void removeCallback(Callback callback) {
-        callbacks.remove(callback);
+    private boolean isLastLocationHome() {
+        return true;
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        if(isHomeLocation()) {
-            for (Callback callback : callbacks) {
-                callback.userStayedHomeOneInterval();
-            }
-        }
+        this.lastLocation = location;
     }
 
-    private boolean isHomeLocation() {
-        //TODO Evaluate the homelocation
-        return true;
-    }
+
 
     @Override
     public void onStatusChanged(
@@ -61,9 +57,5 @@ public class StayHomeInteractor implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
 
-    }
-
-    interface Callback {
-        void userStayedHomeOneInterval();
     }
 }

@@ -1,39 +1,46 @@
-package org.wirvsvirushackathon.stayathome.background;
+package org.wirvsvirushackathon.stayathome.model;
 
-import android.app.Service;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.IBinder;
 import android.util.Log;
 
-import java.security.MessageDigest;
-
-import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 
+import java.security.MessageDigest;
+import java.util.Objects;
 
-public class WifiIdentificationService  extends Service {
-    private final String DEBUG_TAG = "WifiIdentificationServ";
+import static android.content.Context.WIFI_SERVICE;
+
+public class HomeWifiManager {
+
+    private static final String KEY_HOME_WIFI_HASH = "KEY_HOME_WIFI_HASH";
+    private static final String DEBUG_TAG = "WifiIdentificationServ";
+
     private SharedPreferences preferences;
-    public String KEY_HOME_WIFI_HASH = "KEY_HOME_WIFI_HASH";
+    private ConnectivityManager connMgr;
+    private WifiManager wifiManager;
 
-    public WifiIdentificationService() {
-        this.preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+    public HomeWifiManager(Context context) {
+        Context appContext = context.getApplicationContext();
+        this.preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
+        this.connMgr = (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        this.wifiManager = (WifiManager) appContext.getSystemService(WIFI_SERVICE);
     }
 
     public boolean isConnectedToWifi() {
         //Schauen ob wlan eingeschaltet ist und eine Verbindung besteht
-        ConnectivityManager connMgr =
-                (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-
         for (Network network : connMgr.getAllNetworks()) {
             NetworkInfo networkInfo = connMgr.getNetworkInfo(network);
+            if (networkInfo == null) {
+                continue;
+            }
+
             if (networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
                 return networkInfo.isConnected();
             }
@@ -46,21 +53,24 @@ public class WifiIdentificationService  extends Service {
         String resultHash = null;
 
         if (isConnectedToWifi()) {
-            WifiManager wifiManager = (WifiManager) this.getSystemService(WIFI_SERVICE);
             WifiInfo info = wifiManager.getConnectionInfo();
             String currentSSiD = info.getSSID();
             try {
-                MessageDigest digest  = MessageDigest.getInstance("SHA-256");
+                MessageDigest digest = MessageDigest.getInstance("SHA-256");
                 byte[] hash = digest.digest(
                         currentSSiD.getBytes());
                 resultHash = toHexString(hash);
             } catch (Exception ex) {
-                Log.d(DEBUG_TAG, "getCurrentWifiSSIDHash: Aktueller Wifi Hash konnte nicht erzeugt werden: " + ex.getMessage());
-                return resultHash;
+                Log.d(DEBUG_TAG,
+                      "getCurrentWifiSSIDHash: Aktueller Wifi Hash konnte "
+                              + "nicht erzeugt werden: "
+                              + ex.getMessage());
+                return null;
             }
-        }
-        else {
-            Log.d(DEBUG_TAG, "getCurrentWifiSSIDHash: Aktueller Wifi Hash konnte nicht erzeugt werden: WLAN nicht verbunden");
+        } else {
+            Log.d(DEBUG_TAG,
+                  "getCurrentWifiSSIDHash: Aktueller Wifi Hash konnte nicht "
+                          + "erzeugt werden: WLAN nicht verbunden");
         }
 
         return resultHash;
@@ -72,8 +82,12 @@ public class WifiIdentificationService  extends Service {
             String currentWifiHash = getCurrentWifiSSIDHash();
 
             //Hash in shared preferences speichern
-            preferences.edit().putString(KEY_HOME_WIFI_HASH, currentWifiHash).apply();
-            Log.d(DEBUG_TAG, "setHomeWifiFromCurrentWifi: Hash gespeichert: " + currentWifiHash);
+            preferences.edit()
+                       .putString(KEY_HOME_WIFI_HASH, currentWifiHash)
+                       .apply();
+            Log.d(DEBUG_TAG,
+                  "setHomeWifiFromCurrentWifi: Hash gespeichert: "
+                          + currentWifiHash);
             return true;
         }
         Log.d(DEBUG_TAG, "setHomeWifiFromCurrentWifi: Keine WLAN Verbindung");
@@ -84,8 +98,8 @@ public class WifiIdentificationService  extends Service {
     private static String toHexString(byte[] bytes) {
         StringBuilder hexString = new StringBuilder();
 
-        for (int i = 0; i < bytes.length; i++) {
-            String hex = Integer.toHexString(0xFF & bytes[i]);
+        for (byte aByte : bytes) {
+            String hex = Integer.toHexString(0xFF & aByte);
             if (hex.length() == 1) {
                 hexString.append('0');
             }
@@ -101,32 +115,25 @@ public class WifiIdentificationService  extends Service {
             String wifiSSIDHashCurrent = getCurrentWifiSSIDHash();
 
             //Hash mit Wert aus shared preferences vergleichen
-            String wifiSSIDHashStored = preferences.getString(KEY_HOME_WIFI_HASH, "");
-            Log.d(DEBUG_TAG, "isConnectedToHomeWifi: Hashwert geladen: " + wifiSSIDHashStored);
+            String
+                    wifiSSIDHashStored
+                    = preferences.getString(KEY_HOME_WIFI_HASH, "");
+            Log.d(DEBUG_TAG,
+                  "isConnectedToHomeWifi: Hashwert geladen: "
+                          + wifiSSIDHashStored);
 
-            if (wifiSSIDHashCurrent.equals(wifiSSIDHashStored)) {
+            if (Objects.equals(wifiSSIDHashCurrent, wifiSSIDHashStored)) {
                 //WLAN von zuhause verbunden
                 Log.d(DEBUG_TAG, "isConnectedToHomeWifi: Home Wifi verbunden");
                 return true;
-            }
-            else {
+            } else {
                 //WLAN von zuhause nicht verbunden (anderes WLAN)
-                Log.d(DEBUG_TAG, "isConnectedToHomeWifi: Anderes Wifi verbunden");
+                Log.d(DEBUG_TAG,
+                      "isConnectedToHomeWifi: Anderes Wifi verbunden");
                 return false;
             }
         }
         Log.d(DEBUG_TAG, "isConnectedToHomeWifi: Keine WLAN Verbindung");
         return false;
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-    }
-
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
     }
 }

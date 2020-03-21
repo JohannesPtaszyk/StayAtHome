@@ -24,7 +24,7 @@
 		</activity>
 
 		<service android:name = ".background.BackgroundService" />
-        <service android:name=".background.WifiIdentificationService" />
+        <service android:name=".model.HomeWifiManager" />
     </application>
 
 </manifest>
