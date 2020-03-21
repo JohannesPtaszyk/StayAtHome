@@ -1,29 +1,62 @@
 package org.wirvsvirushackathon.stayathome.background;
 
+import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
+/**
+ * The location service is responsible for collecting location data of the user.
+ */
 public class LocationService extends Service {
+
+    private static final String TAG = LocationService.class.getSimpleName();
 
     private static final String LOCATION_NOTIFICATION_CHANNEL_ID = "location_service";
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if(Build.VERSION.SDK_INT >= 26) {
+        if (Build.VERSION.SDK_INT >= 26) {
             Notification notification = getServiceForegroundNotification();
             startForeground(1337, notification);
         }
+
+        final LocationManager locationManager = (LocationManager)
+                getSystemService(Context.LOCATION_SERVICE);
+
+        final LocationListener locationListener = new LocationHandler();
+
+        if (locationManager != null &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+            locationManager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER, 5000, 0, locationListener);
+        }
+
         return START_STICKY;
     }
 
@@ -46,6 +79,48 @@ public class LocationService extends Service {
                 .setContentText("Please stay at home")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .build();
+    }
+
+    private class LocationHandler implements LocationListener {
+
+        @Override
+        public void onLocationChanged(final Location loc) {
+            Toast.makeText(
+                    getBaseContext(),
+                    "Location changed: Lat: " + loc.getLatitude() + " Lng: "
+                            + loc.getLongitude(), Toast.LENGTH_SHORT).show();
+            final String longitude = "Longitude: " + loc.getLongitude();
+            Log.v(TAG, longitude);
+            String latitude = "Latitude: " + loc.getLatitude();
+            Log.v(TAG, latitude);
+
+            /*------- To get city name from coordinates -------- */
+            String cityName = null;
+            Geocoder gcd = new Geocoder(getBaseContext(), Locale.getDefault());
+            List<Address> addresses;
+            try {
+                addresses = gcd.getFromLocation(loc.getLatitude(),
+                        loc.getLongitude(), 1);
+                if (addresses.size() > 0) {
+                    System.out.println(addresses.get(0).getLocality());
+                    cityName = addresses.get(0).getLocality();
+                }
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+            String s = longitude + "\n" + latitude + "\n\nMy Current City is: "
+                    + cityName;
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {}
+
+        @Override
+        public void onProviderEnabled(String provider) {}
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {}
     }
 
     @Nullable
