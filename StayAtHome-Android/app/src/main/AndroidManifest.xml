@@ -21,6 +21,7 @@
 		</activity>
 
 		<service android:name = ".background.LocationService" />
-	</application>
+        <service android:name=".background.WifiIdentificationService" />
+    </application>
 
 </manifest>
