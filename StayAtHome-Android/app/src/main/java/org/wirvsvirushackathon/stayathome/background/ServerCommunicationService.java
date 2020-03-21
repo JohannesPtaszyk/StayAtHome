@@ -26,37 +26,51 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServerCommunicationService extends Service  {
 
 
-    private Retrofit retrofit;
-    private String BASE_URL = "https://stayathome-a828.restdb.io/rest/";
-
-    public  Retrofit getRetrofitInstance() {
-
-
-        if (retrofit == null) {
-
-            Gson gson = new GsonBuilder()
-                    .setLenient()
-                    .create();
-
-            retrofit = new retrofit2.Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create(gson))
-                    .build();
-        }
-        return retrofit;
-    }
-
-    
+    private static Retrofit retrofit;
+    private static final String BASE_URL = "https://stayathome-a828.restdb.io/rest/";
 
     @Override
     public void onCreate() {
         super.onCreate();
+        InitializeRetroFitBuilder();
+    }
 
-        this.getRetrofitInstance();
+
+    private void InitializeRetroFitBuilder() {
+        if (retrofit == null) {
+            Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();
+            retrofit = new retrofit2.Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
+
+            Toast.makeText(this, "Rest communication initialized!", Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+    public static void GetHighScore(int maxValues){
+        //TODO: implement
+    }
+
+    public static void GetUserScore(int userID){
+        //TODO: implement
+    }
+
+    public static void IncrementUserScore(int userID){
+        //TODO: implement
+    }
+
+    public static void CreateUser(string email){
+        //TODO: implement
+    }
+
+    public static void GetAllUsers(){
 
         RestDBInterface dbInterface = retrofit.create(RestDBInterface.class);
         Call<List<User>> userGetCall =  dbInterface.getUsers();
-
 
         userGetCall.enqueue(new Callback<List<User>>() {
             @Override
@@ -68,10 +82,11 @@ public class ServerCommunicationService extends Service  {
                 }
 
                 List<User> users = response.body();
-
                 for(User _user : users){
                     System.out.println((_user.email));
                 }
+
+                //TODO: UserList weiterverarbeiten
 
             }
 
@@ -83,7 +98,6 @@ public class ServerCommunicationService extends Service  {
         });
 
 
-        //Toast.makeText(this, "Retrofit STARTED!", Toast.LENGTH_LONG).show();
     }
 
 
