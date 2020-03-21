@@ -7,13 +7,58 @@
 	tools:context = ".ui.LaunchFragment">
 
 	<com.google.android.material.button.MaterialButton
-		android:id = "@+id/btn_start"
-		android:layout_width = "wrap_content"
-		android:layout_height = "wrap_content"
-		android:layout_marginBottom = "100dp"
-		android:text = "Bestätigen"
-		app:layout_constraintBottom_toBottomOf = "parent"
-		app:layout_constraintEnd_toEndOf = "parent"
-		app:layout_constraintStart_toStartOf = "parent" />
+		android:id="@+id/btn_start"
+		android:layout_width="322dp"
+		android:layout_height="80dp"
+		android:text="Auf gehts du Lauch"
+		android:textSize="24sp"
+		app:backgroundTint="#FB0076"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintVertical_bias="0.96" />
+
+	<EditText
+		android:id="@+id/eTxt_mail"
+		android:layout_width="315dp"
+		android:layout_height="56dp"
+		android:layout_marginBottom="150dp"
+		android:ems="10"
+		android:inputType="textEmailAddress"
+		android:text="Gib mal deine Mail..."
+		android:textSize="20sp"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintVertical_bias="0.65999997" />
+
+	<EditText
+		android:id="@+id/eTxt_Name"
+		android:layout_width="317dp"
+		android:layout_height="62dp"
+		android:ems="10"
+		android:inputType="textPersonName"
+		android:text="Wie heisst du?"
+		android:textSize="20sp"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintVertical_bias="0.35000002" />
+
+	<ImageButton
+		android:id="@+id/imageButton_profilePic"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:src="@drawable/ic_launcher_foreground"
+		android:contentDescription="Profilbild auswählen"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintVertical_bias="0.07999998" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
