@@ -104,7 +104,7 @@ public class WifiIdentificationService  extends Service {
             String wifiSSIDHashStored = preferences.getString(KEY_HOME_WIFI_HASH, "");
             Log.d(DEBUG_TAG, "isConnectedToHomeWifi: Hashwert geladen: " + wifiSSIDHashStored);
 
-            if (wifiSSIDHashCurrent == wifiSSIDHashStored) {
+            if (wifiSSIDHashCurrent.equals(wifiSSIDHashStored)) {
                 //WLAN von zuhause verbunden
                 Log.d(DEBUG_TAG, "isConnectedToHomeWifi: Home Wifi verbunden");
                 return true;
