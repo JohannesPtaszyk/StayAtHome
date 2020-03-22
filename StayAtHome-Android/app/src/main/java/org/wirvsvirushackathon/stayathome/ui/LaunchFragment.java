@@ -20,7 +20,9 @@ import com.google.android.material.textfield.TextInputLayout;
 import org.wirvsvirushackathon.stayathome.R;
 import org.wirvsvirushackathon.stayathome.data.User;
 import org.wirvsvirushackathon.stayathome.data.UserPreferencesDataSource;
+import org.wirvsvirushackathon.stayathome.model.RestDBInterface;
 import org.wirvsvirushackathon.stayathome.model.ServerCommunicationManager;
+import org.wirvsvirushackathon.stayathome.model.UserManager;
 
 import java.util.List;
 
@@ -82,7 +84,7 @@ public class LaunchFragment extends Fragment {
 
                 // Next step : Check if this email is already registered
                 /*
-                //TODO: Check nullpointer ==> not needed for prototype
+                //TODO: not necassary in prototype
                 Call<List<User>>  getUser = ServerCommunicationManager.getDbInterface().getUserByMail(email.toString());
                 Callback<List<User>> callback = new Callback<List<User>>() {
                     @Override
@@ -109,27 +111,30 @@ public class LaunchFragment extends Fragment {
 
                 // Create User object as parameter for retrofit2 callback
                 User temp = new User(userPreferencesDataSource.getUserEmail(),userPreferencesDataSource.getUserName());
-                Call<User> userCreateCall = ServerCommunicationManager.getDbInterface().CreateUser(temp);
-                userCreateCall.enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
 
-                        if(!response.isSuccessful()) {
-                            Log.e(this.getClass().getName().toString(),response.message());
-                            return;
+                    Call<User> userCreateCall = ServerCommunicationManager.getDbInterface().CreateUser(temp);
+                    userCreateCall.enqueue(new Callback<User>() {
+                        @Override
+                        public void onResponse(Call<User> call, Response<User> response) {
+
+                            if (!response.isSuccessful()) {
+                                Log.e(this.getClass().getName().toString(), response.message());
+                                //TODO: Error handling on failed user creation
+                            }
+
+                            Log.d(this.getClass().getName(), "User created successfully!");
                         }
 
-                        Log.d(this.getClass().getName(),"User created successfully!");
-                    }
+                        @Override
+                        public void onFailure(Call<User> call, Throwable t) {
 
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-
-                    }
-                });
+                        }
+                    });
 
 
 
+                if(UserManager.user == null)
+                    UserManager.user = new User(userPreferencesDataSource.getUserEmail(),userPreferencesDataSource.getUserName());
 
                 // Switch to next View
                 Navigation.findNavController(root)
@@ -144,9 +149,20 @@ public class LaunchFragment extends Fragment {
     public void onViewCreated(
             @NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // if user is already existing => skip this fragment
         if(!userPreferencesDataSource.getUserName().isEmpty() && !userPreferencesDataSource.getUserEmail().isEmpty()) {
+
+            if(UserManager.user == null)
+                UserManager.user = new User(userPreferencesDataSource.getUserEmail(),userPreferencesDataSource.getUserName());
+
             Navigation.findNavController(view)
                       .navigate(R.id.action_launchFragment_to_homeScreenFragment);
+
         }
+
+
+
+
     }
 }

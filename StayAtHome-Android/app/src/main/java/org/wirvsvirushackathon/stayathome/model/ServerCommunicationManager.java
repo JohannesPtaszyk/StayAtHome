@@ -43,9 +43,10 @@ public class ServerCommunicationManager {
             Log.d(this.getClass().getName(),"REST Communication Builder initialized");
         }
 
-        if(dbInterface == null)
+        if(dbInterface == null) {
+            Log.d(this.getClass().getName(),"Generated Retrofit DB Interface");
             getDbInterface();
-
+        }
 
     }
 
@@ -53,8 +54,11 @@ public class ServerCommunicationManager {
 
         if(dbInterface==null)
         {
+            if(retrofit==null)
+                getRetrofitInstance();
+
             dbInterface = retrofit.create(RestDBInterface.class);
-            return dbInterface;
+
         }
 
         return dbInterface;
@@ -89,13 +93,6 @@ public class ServerCommunicationManager {
 
     public static void IncrementUserScore(int userID){
         //TODO: implement
-    }
-
-
-    public  void CreateUser(User user){
-
-
-
     }
 
     public static void GetUserRank(int userID){

@@ -23,10 +23,12 @@ import androidx.core.app.NotificationCompat;
 import org.wirvsvirushackathon.stayathome.data.PointsDataSource;
 import org.wirvsvirushackathon.stayathome.data.PointsRepository;
 import org.wirvsvirushackathon.stayathome.data.PointsSharedPreferencesDataSource;
+import org.wirvsvirushackathon.stayathome.data.User;
 import org.wirvsvirushackathon.stayathome.model.HomeWifiManager;
 import org.wirvsvirushackathon.stayathome.model.PointsManager;
 import org.wirvsvirushackathon.stayathome.model.ServerCommunicationManager;
 import org.wirvsvirushackathon.stayathome.model.StayHomeInteractor;
+import org.wirvsvirushackathon.stayathome.model.UserManager;
 
 import java.util.concurrent.TimeUnit;
 
@@ -44,6 +46,7 @@ public class BackgroundService extends Service {
     private StayHomeInteractor stayHomeInteractor;
     private PointsManager pointsManager;
     private ServerCommunicationManager serverCommunicationManager;
+    private UserManager userManager;
 
 
     @Override

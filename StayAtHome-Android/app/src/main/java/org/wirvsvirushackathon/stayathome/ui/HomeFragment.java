@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import org.wirvsvirushackathon.stayathome.R;
 import org.wirvsvirushackathon.stayathome.data.PointsSharedPreferencesDataSource;
 import org.wirvsvirushackathon.stayathome.model.HomeWifiManager;
+import org.wirvsvirushackathon.stayathome.model.UserManager;
 
 import java.util.Date;
 
@@ -46,12 +48,20 @@ public class HomeFragment extends Fragment implements PointsSharedPreferencesDat
         this.pointsSharedPreferences = new PointsSharedPreferencesDataSource(requireContext());
         pointsView.setText(String.valueOf(pointsSharedPreferences.getCurrentPoints()));
         pointsSharedPreferences.addCallback(this);
+
+
         return root;
     }
 
     @Override
     public void onPointsUpdated(int points) {
         pointsView.setText(String.valueOf(points));
+
+        // Update Remote Database
+
+        Log.d(this.getClass().getName(),UserManager.user.name);
+
+
     }
 
     @Override
