@@ -1,11 +1,65 @@
 <resources>
 
-	<!-- Base application theme. -->
 	<style name = "AppTheme" parent = "Theme.MaterialComponents.DayNight.NoActionBar">
-		<!-- Customize your theme here. -->
-		<item name = "colorPrimary">@color/colorPrimary</item>
-		<item name = "colorPrimaryDark">@color/colorPrimaryDark</item>
-		<item name = "colorAccent">@color/colorAccent</item>
+
+		<item name = "colorPrimary">@color/primaryColor</item>
+		<item name = "colorPrimaryVariant">@color/primaryDarkColor</item>
+
+		<item name = "colorSecondary">@color/secondaryColor</item>
+		<item name = "colorSecondaryVariant">@color/secondaryDarkColor</item>
+
+		<item name = "android:statusBarColor">@android:color/transparent</item>
+
+		<item name = "materialCardViewStyle">@style/AppTheme.CardView</item>
+
+		<item name = "floatingActionButtonStyle">
+			@style/Widget.MaterialComponents.FloatingActionButton
+		</item>
+
+		<item name = "materialAlertDialogTheme">@style/AppTheme.AlertDialog</item>
+
+		<item name = "textInputStyle">
+			@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox
+		</item>
+
+		<item name = "shapeAppearanceSmallComponent">
+			@style/AppTheme.ShapeAppearance.SmallComponent
+		</item>
+		<item name = "shapeAppearanceMediumComponent">
+			@style/AppTheme.ShapeAppearance.MediumComponent
+		</item>
+		<item name = "shapeAppearanceLargeComponent">
+			@style/AppTheme.ShapeAppearance.LargeComponent
+		</item>
+	</style>
+	<style name = "AppTheme.ShapeAppearance.SmallComponent" parent = "ShapeAppearance.MaterialComponents.SmallComponent">
+		<item name = "cornerFamily">rounded</item>
+		<item name = "cornerSize">16dp</item>
+	</style>
+
+	<style name = "AppTheme.ShapeAppearance.MediumComponent" parent = "ShapeAppearance.MaterialComponents.MediumComponent">
+		<item name = "cornerFamily">rounded</item>
+		<item name = "cornerSize">32dp</item>
+	</style>
+
+	<style name = "AppTheme.ShapeAppearance.LargeComponent" parent = "ShapeAppearance.MaterialComponents.LargeComponent">
+		<item name = "cornerFamily">rounded</item>
+		<item name = "cornerSize">32dp</item>
+	</style>
+
+	<style name = "AppTheme.AlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog.Centered">
+		<item name = "buttonBarPositiveButtonStyle">@style/AppTheme.AlertDialog.ButtonStyle</item>
+		<item name = "buttonBarNegativeButtonStyle">@style/AppTheme.AlertDialog.ButtonStyle</item>
+		<item name = "buttonBarNeutralButtonStyle">@style/AppTheme.AlertDialog.ButtonStyle</item>
+
+	</style>
+
+	<style name = "AppTheme.AlertDialog.ButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+		<item name = "android:textColor">@color/secondaryColor</item>
+	</style>
+
+	<style name = "AppTheme.CardView" parent = "Widget.MaterialComponents.CardView">
+		<item name = "cardCornerRadius">16dp</item>
 	</style>
 
 </resources>

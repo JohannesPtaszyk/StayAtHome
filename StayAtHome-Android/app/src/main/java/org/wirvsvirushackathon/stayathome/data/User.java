@@ -1,4 +1,4 @@
-package org.wirvsvirushackathon.stayathome.model;
+package org.wirvsvirushackathon.stayathome.data;
 
 
 import com.google.gson.annotations.SerializedName;
