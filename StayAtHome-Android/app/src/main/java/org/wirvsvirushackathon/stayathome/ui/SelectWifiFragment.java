@@ -1,20 +1,22 @@
 package org.wirvsvirushackathon.stayathome.ui;
 
 import android.content.Context;
-import android.content.IntentFilter;
+import android.content.Intent;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -24,9 +26,12 @@ import org.wirvsvirushackathon.stayathome.model.HomeWifiManager;
 
 public class SelectWifiFragment extends Fragment {
 
+    private HomeWifiManager myHomeWifiManager ;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        myHomeWifiManager = new HomeWifiManager(requireContext().getApplicationContext());
     }
 
     @Override
@@ -53,39 +58,54 @@ public class SelectWifiFragment extends Fragment {
         switchActivateWifi.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
 
-                final WifiManager wifi = (WifiManager) mainActivity.getApplicationContext()
-                        .getSystemService(Context.WIFI_SERVICE);
-                final boolean success;
-                if (wifi != null) {
-                    success = wifi.setWifiEnabled(true);
+                if(myHomeWifiManager.isWifiEnabled() && myHomeWifiManager.isConnectedToWifi()) {
+                    setHomeWifiAndRedirect(root);
                 } else {
-                    success = false;
-                }
-
-                if (success) {
-                    HomeWifiManager myHomeWifiManager = new HomeWifiManager(mainActivity.getApplicationContext());
-                    //TODO Wait for actual Wifi connection (or use callback), remove unnecessary error messages
-
-                    if (myHomeWifiManager.setHomeWifiFromCurrentWifi()) {
-                        // TODO add button for navigation, enable button here if WIFI success
-                        switchActivateWifi.setEnabled(false);
-                        Navigation.findNavController(root)
-                                .navigate(R.id.action_selectWifiFragment_to_homeFragment);
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        showWifiSettingsForAndroidQ();
+                    } else {
+                        enableWifiForAndroidBelowQ(mainActivity, root);
                     }
-                    else {
-                        //If it didn't work (because Wifi is not connected yet)
-                        Toast.makeText(getActivity(), "Kleinen Moment! Die Verbindung zu deinem WLAN wird noch hergestellt, versuche es bitte noch einmal.",
-                                Toast.LENGTH_LONG).show();
-                        switchActivateWifi.setChecked(false);
-                    }
-                } else {
-                    //Unable to activate Wifi
                     switchActivateWifi.setChecked(false);
-                    Toast.makeText(getActivity(), "Sorry, kann dein WLAN nicht aktivieren.",
-                            Toast.LENGTH_LONG).show();
                 }
+
             }
         });
         return root;
+    }
+
+    private void enableWifiForAndroidBelowQ(Context mainActivity, View root) {
+
+        final WifiManager wifi = (WifiManager) mainActivity.getApplicationContext()
+                                                           .getSystemService(Context.WIFI_SERVICE);
+        final boolean success;
+        if (wifi != null) {
+            success = wifi.setWifiEnabled(true);
+        } else {
+            success = false;
+        }
+
+        if(success) {
+            setHomeWifiAndRedirect(root);
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    private void showWifiSettingsForAndroidQ() {
+        Intent panelIntent = new Intent(Settings.Panel.ACTION_WIFI);
+        SelectWifiFragment.this.startActivityForResult(panelIntent, 1337);
+    }
+
+    private void setHomeWifiAndRedirect(View root) {
+
+        if(myHomeWifiManager.setHomeWifiFromCurrentWifi()) {
+            Navigation.findNavController(root).navigate(R.id.action_selectWifiFragment_to_homeFragment);
+        }
+    }
+
+    @Override
+    public void onActivityResult(
+            int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
