@@ -7,4 +7,6 @@
 	<color name = "secondaryColor">#ffa17a</color>
 	<color name = "secondaryLightColor">#ffd3a9</color>
 	<color name = "secondaryDarkColor">#c9724d</color>
+
+	<color name= "stayAtHomeBlueColor">#76DAEC</color>
 </resources>
