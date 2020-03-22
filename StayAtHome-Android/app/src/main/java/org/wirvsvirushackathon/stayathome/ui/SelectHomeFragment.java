@@ -18,6 +18,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
+
 import org.wirvsvirushackathon.stayathome.R;
 import org.wirvsvirushackathon.stayathome.data.UserPreferencesDataSource;
 
@@ -47,49 +51,12 @@ public class SelectHomeFragment extends Fragment {
     @SuppressLint("MissingPermission")
     private void waitForLocationAndSetAsHome(View root) {
 
-        LocationManager locationManager = (LocationManager) requireContext()
-                .getSystemService(Context.LOCATION_SERVICE);
-        if (isLocationPermissionDenied()) {
-            return;
-        }
-        LocationListener listener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                if (locationManager != null) {
-                    locationManager.removeUpdates(this);
-                }
-                new UserPreferencesDataSource(requireContext()).setUserHomeLocation(location);
-                Navigation.findNavController(root)
-                          .navigate(R.id.action_selectHomeFragment_to_selectWifiFragment);
-            }
-
-            @Override
-            public void onStatusChanged(
-                    String provider,
-                    int status,
-                    Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(
-                    String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(
-                    String provider) {
-
-            }
-        };
-        if (locationManager == null) {
-            return;
-        }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                                               0,
-                                               0,
-                                               listener);
+        FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(requireContext());
+        client.getLastLocation().addOnSuccessListener(location -> {
+            new UserPreferencesDataSource(requireContext()).setUserHomeLocation(location);
+            Navigation.findNavController(root)
+                      .navigate(R.id.action_selectHomeFragment_to_selectWifiFragment);
+        });
     }
 
     private boolean isLocationPermissionDenied() {
