@@ -48,14 +48,12 @@ public interface RestDBInterface {
     Call<User> CreateUser(@Body User user);
 
 
-    @PUT("appusers")
+    @PUT("appusers/{id}")
     @Headers({
             "x-apikey: 93f0d1cfad5791c5d04bb8a85ceee8810b78a",
             "Content-Type: application/json",
             "cache-control:no-cache"
     })
-    Call<Void> UpdateUser(@Body User user);
-
-
+    Call<Void> UpdateUser(@Path("id") String id,@Body User user);
 
 }

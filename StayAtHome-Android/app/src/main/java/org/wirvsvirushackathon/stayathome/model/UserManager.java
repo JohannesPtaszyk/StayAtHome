@@ -22,33 +22,40 @@ public class UserManager {
 
     public static void SyncWithDB(){
 
+        Log.d(UserManager.class.getSimpleName(),"Sync User with Database");
+
         Call<List<User>>  getUser = ServerCommunicationManager.getDbInterface().getUserByMail(user.email);
         Callback<List<User>> callback = new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
 
                 if (!response.isSuccessful()) {
-                    Log.e(this.getClass().getName().toString(), response.raw().toString());
+                    Log.e(UserManager.class.getSimpleName().toString(), response.raw().toString());
                 }
+
+
 
                 User queryUser = response.body().get(0);
                 if(queryUser==null)
                 {
-                    Log.e(this.getClass().getName(),"Error :cant find user in database");
+                    Log.e(UserManager.class.getSimpleName(),"Error :cant find user in database");
                     return;
                 }
 
                 // Update user data
-                UserManager.user.id=queryUser.id;
+                UserManager.user.dbID = queryUser.dbID;
                 UserManager.user.name=queryUser.name;
                 UserManager.user.motionscore=queryUser.motionscore;
                 UserManager.user.rank = queryUser.rank;
+
+
+                Log.d(UserManager.class.getSimpleName(),"USER DATABASE ID = "+UserManager.user.dbID);
 
             }
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
-                Log.e(this.getClass().getName(), t.getMessage());
+                Log.e(UserManager.class.getSimpleName(), t.getMessage());
             }
 
         };

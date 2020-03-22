@@ -75,24 +75,41 @@ public class HomeFragment extends Fragment implements PointsSharedPreferencesDat
     public void onPointsUpdated(int points) {
         pointsView.setText(String.valueOf(points));
 
+
+
+
         // Synchronize with Database
+        if(UserManager.user.dbID==null){
+
+            UserManager.SyncWithDB();
+
+        }
+
+
         UserManager.user.motionscore = points;
 
-        Call<User> updateUserCall = ServerCommunicationManager.getDbInterface().CreateUser(UserManager.user);
-        updateUserCall.enqueue(new Callback<User>() {
+
+        Log.d(getClass().getSimpleName(),"try update motionscore for user id = "+UserManager.user.dbID + " with score = "+UserManager.user.motionscore);
+
+        Call<Void> updateUserCall = ServerCommunicationManager.getDbInterface().UpdateUser(UserManager.user.dbID,UserManager.user);
+        updateUserCall.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
 
                 if(!response.isSuccessful()){
-                    //TODO: error handling
+
+                    Log.e(getClass().getSimpleName(),"error updating motionscore");
+
                 }
 
+                    Log.d(getClass().getSimpleName(),"updated motion score");
 
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
 
+                Log.e(getClass().getSimpleName(),"error updating motionscore");
             }
         });
 
