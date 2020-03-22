@@ -39,24 +39,26 @@ public class ServerCommunicationManager {
 
     public void InitializeRetroFitBuilder() {
         if (retrofit == null) {
-            Gson gson = new GsonBuilder()
-                    .setLenient()
-                    .create();
-            retrofit = new retrofit2.Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create(gson))
-                    .build();
-
-
+            getRetrofitInstance();
             Log.d(this.getClass().getName(),"REST Communication Builder initialized");
         }
 
+        if(dbInterface == null)
+            getDbInterface();
+
+
+    }
+
+    public static RestDBInterface getDbInterface(){
+
         if(dbInterface==null)
         {
-
             dbInterface = retrofit.create(RestDBInterface.class);
-
+            return dbInterface;
         }
+
+        return dbInterface;
+
     }
 
     public static Retrofit getRetrofitInstance() {
@@ -89,31 +91,12 @@ public class ServerCommunicationManager {
         //TODO: implement
     }
 
-    /*
-    public static void CreateUser(String name,String email){
-        //TODO: implement
 
-        //API CALL DUMMY : https://stayathome-a828.restdb.io/rest/appusers?{"email":"test@virus.de","name":"mark"}
+    public  void CreateUser(User user){
 
-        Call<User> userCreateCall = dbInterface.CreateUser(email=email,name=name);
 
-        userCreateCall.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
 
-                User user = response.body();
-                System.out.println("USER id="+user.id);
-                Log.d(this.getClass().getName(),"New User Created with id="+user.id);
-
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                System.out.println("USER CREATION FAILED");
-            }
-        });
-
-    }*/
+    }
 
     public static void GetUserRank(int userID){
         //TODO: implement
