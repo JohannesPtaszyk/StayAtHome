@@ -25,6 +25,7 @@ import org.wirvsvirushackathon.stayathome.data.PointsRepository;
 import org.wirvsvirushackathon.stayathome.data.PointsSharedPreferencesDataSource;
 import org.wirvsvirushackathon.stayathome.model.HomeWifiManager;
 import org.wirvsvirushackathon.stayathome.model.PointsManager;
+import org.wirvsvirushackathon.stayathome.model.ServerCommunicationManager;
 import org.wirvsvirushackathon.stayathome.model.StayHomeInteractor;
 
 import java.util.concurrent.TimeUnit;
@@ -42,6 +43,7 @@ public class BackgroundService extends Service {
     private final Handler handler = new Handler();
     private StayHomeInteractor stayHomeInteractor;
     private PointsManager pointsManager;
+    private ServerCommunicationManager serverCommunicationManager;
 
 
     @Override
@@ -74,6 +76,9 @@ public class BackgroundService extends Service {
 
         HomeWifiManager homeWifiManager = new HomeWifiManager(this);
         this.stayHomeInteractor = new StayHomeInteractor(locationManager, homeWifiManager);
+
+        serverCommunicationManager = new ServerCommunicationManager(this);
+        serverCommunicationManager.InitializeRetroFitBuilder();
 
         PointsDataSource
                 pointsDataSource = new PointsSharedPreferencesDataSource(this);

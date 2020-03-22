@@ -1,6 +1,6 @@
-package org.wirvsvirushackathon.stayathome.background;
+package org.wirvsvirushackathon.stayathome.model;
 
-import org.wirvsvirushackathon.stayathome.model.User;
+import org.wirvsvirushackathon.stayathome.data.User;
 
 import java.util.List;
 

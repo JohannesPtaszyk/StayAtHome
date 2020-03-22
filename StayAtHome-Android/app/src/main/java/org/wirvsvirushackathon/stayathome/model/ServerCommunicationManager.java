@@ -1,19 +1,16 @@
-package org.wirvsvirushackathon.stayathome.background;
+package org.wirvsvirushackathon.stayathome.model;
 
-import android.app.Service;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.wirvsvirushackathon.stayathome.model.User;
+import org.wirvsvirushackathon.stayathome.data.User;
 
 import java.util.List;
 
@@ -27,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Class providing static functions to receive or send data to restDB Database
  * via retrofit2 in JSON-Format.
  */
-public class ServerCommunicationService {
+public class ServerCommunicationManager {
 
     private static Retrofit retrofit;
     private static RestDBInterface dbInterface;
@@ -36,12 +33,12 @@ public class ServerCommunicationService {
     private Context applicationContext;
 
 
-    public ServerCommunicationService(Context context){
+    public ServerCommunicationManager(Context context){
         applicationContext = context.getApplicationContext();
         this.preferences = PreferenceManager.getDefaultSharedPreferences(applicationContext);
     }
 
-    private void InitializeRetroFitBuilder() {
+    public void InitializeRetroFitBuilder() {
         if (retrofit == null) {
             Gson gson = new GsonBuilder()
                     .setLenient()
@@ -51,7 +48,8 @@ public class ServerCommunicationService {
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
 
-            Toast.makeText(applicationContext, "Rest communication initialized!", Toast.LENGTH_LONG).show();
+
+            Log.d(this.getClass().getName(),"REST Communication Builder initialized");
         }
 
         if(dbInterface==null)
@@ -85,10 +83,10 @@ public class ServerCommunicationService {
         userCreateCall.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                System.out.println("USER CREATED");
 
                 User user = response.body();
                 System.out.println("USER id="+user.id);
+                Log.d(this.getClass().getName(),"New User Created with id="+user.id);
 
             }
 
