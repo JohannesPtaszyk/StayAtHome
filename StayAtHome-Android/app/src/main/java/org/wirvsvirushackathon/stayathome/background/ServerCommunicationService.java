@@ -1,9 +1,7 @@
 package org.wirvsvirushackathon.stayathome.background;
 
-import android.app.Notification;
 import android.app.Service;
 import android.content.Intent;
-import android.os.Build;
 import android.os.IBinder;
 import android.widget.Toast;
 
@@ -12,9 +10,8 @@ import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.wirvsvirushackathon.stayathome.data.User;
+import org.wirvsvirushackathon.stayathome.model.User;
 
-import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -23,8 +20,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Class providing static functions to receive or send data to restDB Database
+ * via retrofit2 in JSON-Format.
+ */
 public class ServerCommunicationService extends Service  {
-
 
     private static Retrofit retrofit;
     private static final String BASE_URL = "https://stayathome-a828.restdb.io/rest/";
@@ -63,9 +63,15 @@ public class ServerCommunicationService extends Service  {
         //TODO: implement
     }
 
-    public static void CreateUser(String email){
+    public static void CreateUser(String name,String email){
         //TODO: implement
     }
+
+    public static void GetUserRank(int userID){
+        //TODO: implement
+    }
+
+
 
     public static void GetAllUsers(){
 
@@ -96,16 +102,8 @@ public class ServerCommunicationService extends Service  {
                 System.out.println("RETROFIT_FAIL");
             }
         });
-
-
     }
-
-
     @Nullable
     @Override
-    public IBinder onBind(Intent intent) {
-
-        return null;
-    }
-
+    public IBinder onBind(Intent intent) {return null;}
 }
