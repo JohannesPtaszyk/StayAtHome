@@ -19,34 +19,46 @@
 		app:layout_constraintTop_toTopOf="parent"
 		app:layout_constraintVertical_bias="0.96" />
 
-	<EditText
-		android:id="@+id/eTxt_mail"
-		android:layout_width="315dp"
-		android:layout_height="56dp"
-		android:layout_marginBottom="150dp"
-		android:ems="10"
-		android:inputType="textEmailAddress"
-		android:text="Gib mal deine Mail..."
-		android:textSize="20sp"
+	<com.google.android.material.textfield.TextInputLayout
+		android:layout_width = "wrap_content"
+		android:layout_height = "wrap_content"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent"
-		app:layout_constraintVertical_bias="0.65999997" />
+		android:layout_marginBottom="150dp"
+		app:layout_constraintVertical_bias="0.65999997"
+		android:hint="Gib mal deine Mail..."
+		>
 
+	<EditText
+		android:id="@+id/eTxt_mail"
+		android:layout_width="315dp"
+		android:layout_height="56dp"
+		android:ems="10"
+		android:inputType="textEmailAddress"
+		android:textSize="20sp" />
+	</com.google.android.material.textfield.TextInputLayout>
+
+	<com.google.android.material.textfield.TextInputLayout
+		android:layout_width = "wrap_content"
+		android:layout_height = "wrap_content"
+		android:hint="Wie heisst du?"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintVertical_bias="0.35000002">
 	<EditText
 		android:id="@+id/eTxt_Name"
 		android:layout_width="317dp"
 		android:layout_height="62dp"
 		android:ems="10"
 		android:inputType="textPersonName"
-		android:text="Wie heisst du?"
+
 		android:textSize="20sp"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent"
-		app:layout_constraintVertical_bias="0.35000002" />
+ />
+	</com.google.android.material.textfield.TextInputLayout>
 
 	<ImageButton
 		android:id="@+id/imageButton_profilePic"
