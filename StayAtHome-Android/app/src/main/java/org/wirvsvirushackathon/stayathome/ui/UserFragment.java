@@ -1,20 +1,16 @@
 package org.wirvsvirushackathon.stayathome.ui;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.button.MaterialButton;
+import androidx.fragment.app.Fragment;
 
 import org.wirvsvirushackathon.stayathome.R;
-import org.wirvsvirushackathon.stayathome.background.RestDBInterface;
-import org.wirvsvirushackathon.stayathome.background.RetrofitClientInstance;
-import org.wirvsvirushackathon.stayathome.model.User;
+import org.wirvsvirushackathon.stayathome.data.User;
+import org.wirvsvirushackathon.stayathome.model.RestDBInterface;
+import org.wirvsvirushackathon.stayathome.model.ServerCommunicationManager;
 
 import java.util.List;
 
@@ -36,7 +32,7 @@ public class UserFragment extends Fragment {
      */
     public void getHighscoreListe() {
 
-        RestDBInterface dbInterface = RetrofitClientInstance.getRetrofitInstance().create(RestDBInterface.class);
+        RestDBInterface dbInterface = ServerCommunicationManager.getRetrofitInstance().create(RestDBInterface.class);
         Call<List<User>> userGetCall =  dbInterface.getUsers();
 
         userGetCall.enqueue(new Callback<List<User>>() {
