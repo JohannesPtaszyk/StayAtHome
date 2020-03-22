@@ -1,11 +1,14 @@
 package org.wirvsvirushackathon.stayathome.background;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -24,17 +27,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Class providing static functions to receive or send data to restDB Database
  * via retrofit2 in JSON-Format.
  */
-public class ServerCommunicationService extends Service  {
+public class ServerCommunicationService {
 
     private static Retrofit retrofit;
+    private static RestDBInterface dbInterface;
     private static final String BASE_URL = "https://stayathome-a828.restdb.io/rest/";
+    private SharedPreferences preferences;
+    private Context applicationContext;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        InitializeRetroFitBuilder();
+
+    public ServerCommunicationService(Context context){
+        applicationContext = context.getApplicationContext();
+        this.preferences = PreferenceManager.getDefaultSharedPreferences(applicationContext);
     }
-
 
     private void InitializeRetroFitBuilder() {
         if (retrofit == null) {
@@ -46,7 +51,14 @@ public class ServerCommunicationService extends Service  {
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
 
-            Toast.makeText(this, "Rest communication initialized!", Toast.LENGTH_LONG).show();
+            Toast.makeText(applicationContext, "Rest communication initialized!", Toast.LENGTH_LONG).show();
+        }
+
+        if(dbInterface==null)
+        {
+
+            dbInterface = retrofit.create(RestDBInterface.class);
+
         }
     }
 
@@ -65,6 +77,27 @@ public class ServerCommunicationService extends Service  {
 
     public static void CreateUser(String name,String email){
         //TODO: implement
+
+        //API CALL DUMMY : https://stayathome-a828.restdb.io/rest/appusers?{"email":"test@virus.de","name":"mark"}
+
+        Call<User> userCreateCall = dbInterface.CreateUser(email=email,name=name);
+
+        userCreateCall.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                System.out.println("USER CREATED");
+
+                User user = response.body();
+                System.out.println("USER id="+user.id);
+
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                System.out.println("USER CREATION FAILED");
+            }
+        });
+
     }
 
     public static void GetUserRank(int userID){
@@ -75,7 +108,7 @@ public class ServerCommunicationService extends Service  {
 
     public static void GetAllUsers(){
 
-        RestDBInterface dbInterface = retrofit.create(RestDBInterface.class);
+
         Call<List<User>> userGetCall =  dbInterface.getUsers();
 
         userGetCall.enqueue(new Callback<List<User>>() {
@@ -103,7 +136,5 @@ public class ServerCommunicationService extends Service  {
             }
         });
     }
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {return null;}
+
 }
