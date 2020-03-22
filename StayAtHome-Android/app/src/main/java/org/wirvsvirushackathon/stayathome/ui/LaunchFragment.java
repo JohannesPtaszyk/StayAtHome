@@ -82,65 +82,6 @@ public class LaunchFragment extends Fragment {
                     return;
                 }
 
-                // Next step : Check if this email is already registered
-                /*
-                //TODO: not necassary in prototype
-                Call<List<User>>  getUser = ServerCommunicationManager.getDbInterface().getUserByMail(email.toString());
-                Callback<List<User>> callback = new Callback<List<User>>() {
-                    @Override
-                    public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-
-                        if(!response.isSuccessful()){
-                            Log.e(this.getClass().getName().toString(),response.raw().toString());
-                        }
-
-
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<User>> call, Throwable t) {
-                        Log.e(this.getClass().getName().toString(),t.getMessage());
-                    }
-                    getUser.enqueue(callback);
-
-                //TODO: wait for enqueue and check resultlist (Empty List == This user does not exist)
-                };*/
-
-
-
-                // Create User object as parameter for retrofit2 callback
-                User temp = new User(userPreferencesDataSource.getUserEmail(),userPreferencesDataSource.getUserName());
-
-                    Call<User> userCreateCall = ServerCommunicationManager.getDbInterface().CreateUser(temp);
-                    userCreateCall.enqueue(new Callback<User>() {
-                        @Override
-                        public void onResponse(Call<User> call, Response<User> response) {
-
-                            if (!response.isSuccessful()) {
-                                Log.e(this.getClass().getName().toString(), response.message());
-                                //TODO: Error handling on failed user creation
-                            }
-
-                            Log.d(this.getClass().getName(), "User created successfully!");
-                        }
-
-                        @Override
-                        public void onFailure(Call<User> call, Throwable t) {
-
-                        }
-                    });
-
-
-
-                if(UserManager.user == null)
-                    UserManager.user = new User(userPreferencesDataSource.getUserEmail(),userPreferencesDataSource.getUserName());
-
-                UserManager.SyncWithDB(); // get the details from db and sync with user object
-
-
-
-                // Switch to next View
                 Navigation.findNavController(root)
                           .navigate(R.id.action_launchFragment_to_homeScreenFragment);
             });
