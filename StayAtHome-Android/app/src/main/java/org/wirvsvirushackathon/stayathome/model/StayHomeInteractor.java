@@ -108,22 +108,33 @@ public class StayHomeInteractor implements LocationListener {
         return true;
     }
 
+    /**
+     * Returns the average over a collection of timestamped GPS locations. If no GPS locations are
+     * provided, then an IllegalStateException is thrown.
+     *
+     * Note that the average is computed using the mean, i.e. the
+     * curvature of the earth is ignored since the locations are generally very close.
+     *
+     * Note also that the accuracy is not averaged, as the average is not very useful.
+     * @param locations The collection of locations to average.
+     * @return The average location.
+     */
     @RequiresApi(24)
     private GPSLocation getAverageLocation(final Collection<GPSLocation> locations) {
         final long averageTimestamp = (long) locations.stream()
                 .mapToLong(GPSLocation::getTimestamp)
                 .average()
-                .getAsDouble();
+                .orElseThrow(IllegalStateException::new);
 
         final double averageLatitude = locations.stream()
                 .mapToDouble(GPSLocation::getLatitude)
                 .average()
-                .getAsDouble();
+                .orElseThrow(IllegalStateException::new);
 
         final double averageLongitude = locations.stream()
                 .mapToDouble(GPSLocation::getLongitude)
                 .average()
-                .getAsDouble();
+                .orElseThrow(IllegalStateException::new);
 
         return new GPSLocation(
                 averageTimestamp,
