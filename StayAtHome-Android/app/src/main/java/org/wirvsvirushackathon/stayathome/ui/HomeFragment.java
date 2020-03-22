@@ -29,6 +29,7 @@ public class HomeFragment extends Fragment implements PointsSharedPreferencesDat
     private PointsSharedPreferencesDataSource pointsSharedPreferences;
     private TextView pointsView;
     private TextView userNameView;
+    private TextView userStatusView;
 
     private long millisLastWifiTurnOnMsg = 0;
     private long millisWifiTurnOnMsgTimeout = 180000;
@@ -55,6 +56,8 @@ public class HomeFragment extends Fragment implements PointsSharedPreferencesDat
         pointsSharedPreferences.addCallback(this);
         this.userNameView = root.findViewById(R.id.tv_userName);
         this.userNameView.setText(myUserPrefSource.getUserName());
+        this.userStatusView = root.findViewById(R.id.tv_userStatus);
+
 
         return root;
     }
@@ -63,11 +66,12 @@ public class HomeFragment extends Fragment implements PointsSharedPreferencesDat
     public void onPointsUpdated(int points) {
         pointsView.setText(String.valueOf(points));
 
-        // Update Remote Database
+        // TODO Update Remote Database with own points (but less frequently. API limit of calls per second!)
+
+        // TODO Update Rank, from REST Api with Cache
+        //userStatusView.setText("Bla");
 
         Log.d(this.getClass().getName(),UserManager.user.name);
-
-
     }
 
     @Override
