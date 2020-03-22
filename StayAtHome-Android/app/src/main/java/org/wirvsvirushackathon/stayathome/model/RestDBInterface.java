@@ -10,6 +10,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -36,7 +37,7 @@ public interface RestDBInterface {
             "Content-Type: application/json",
             "cache-control:no-cache"
     })
-    Call<List<User>>  getUserByMail(@Query("email") String email);
+    Call<User> getUserByID(@Query("id") String id);
 
 
     @POST("appusers")
@@ -48,7 +49,7 @@ public interface RestDBInterface {
     Call<User> CreateUser(@Body User user);
 
 
-    @PUT("appusers/{id}")
+    @PATCH("appusers/{id}")
     @Headers({
             "x-apikey: 93f0d1cfad5791c5d04bb8a85ceee8810b78a",
             "Content-Type: application/json",

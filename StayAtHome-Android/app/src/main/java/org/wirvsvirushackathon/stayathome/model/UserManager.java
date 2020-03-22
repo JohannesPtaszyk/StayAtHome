@@ -6,6 +6,8 @@ import android.util.Log;
 
 import androidx.preference.PreferenceManager;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.wirvsvirushackathon.stayathome.data.User;
 
 import java.util.List;
@@ -20,47 +22,37 @@ public class UserManager {
 
 
 
-    public static void SyncWithDB(){
 
-        Log.d(UserManager.class.getSimpleName(),"Sync User with Database");
+    public static void SyncWithDB(String uuid){
 
-        Call<List<User>>  getUser = ServerCommunicationManager.getDbInterface().getUserByMail(user.email);
-        Callback<List<User>> callback = new Callback<List<User>>() {
+        Log.d(UserManager.class.getSimpleName(),"Sync User with Database by uuid="+uuid);
+
+        Call<User>  getUser = ServerCommunicationManager.getDbInterface().getUserByID(uuid);
+        getUser.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
 
-                if (!response.isSuccessful()) {
-                    Log.e(UserManager.class.getSimpleName().toString(), response.raw().toString());
-                }
-
-
-
-                User queryUser = response.body().get(0);
-                if(queryUser==null)
+                if(!response.isSuccessful())
                 {
-                    Log.e(UserManager.class.getSimpleName(),"Error :cant find user in database");
-                    return;
+                    Log.e(UserManager.class.getSimpleName(),"Response not successfull "+response);
                 }
 
-                // Update user data
-                UserManager.user.dbID = queryUser.dbID;
-                UserManager.user.name=queryUser.name;
-                UserManager.user.motionscore=queryUser.motionscore;
-                UserManager.user.rank = queryUser.rank;
-
-
-                Log.d(UserManager.class.getSimpleName(),"USER DATABASE ID = "+UserManager.user.dbID);
+                UserManager.user = response.body();
 
             }
 
             @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
-                Log.e(UserManager.class.getSimpleName(), t.getMessage());
+            public void onFailure(Call<User> call, Throwable t) {
+
+                Log.e(UserManager.class.getSimpleName(),t.getMessage());
+                Log.e(UserManager.class.getSimpleName(),t.toString());
+
             }
+        });
 
-        };
+        UserManager.user.dbID = uuid;
 
-        getUser.enqueue(callback);
+
 
     }
 

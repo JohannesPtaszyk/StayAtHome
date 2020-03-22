@@ -24,25 +24,41 @@ public class User {
 
     public User(String dbID, String email, String name, String rank, int motionscore) {
         this.dbID = dbID;
-
         this.email = email;
         this.name = name;
         this.rank = rank;
         this.motionscore = motionscore;
     }
 
-    public User(String email, String name, int motionscore, String rank) {
-        this.email = email;
-        this.motionscore = motionscore;
-        this.rank = rank;
-        this.name = name;
+
+    public String getDbID() {
+        return dbID;
     }
 
-    public User(String email, String name) {
-        this.email = email;
-        this.motionscore = 0;
-        this.rank = "";
-        this.name = name;
+    public String getEmail() {
+        return email;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getRank() {
+        return rank;
+    }
+
+    public int getMotionscore() {
+        return motionscore;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "dbID='" + dbID + '\'' +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", rank='" + rank + '\'' +
+                ", motionscore=" + motionscore +
+                '}';
+    }
 }

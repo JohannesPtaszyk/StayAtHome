@@ -110,7 +110,7 @@ public class LaunchFragment extends Fragment {
 
 
                 // Create User object as parameter for retrofit2 callback
-                User temp = new User(userPreferencesDataSource.getUserEmail(),userPreferencesDataSource.getUserName());
+                User temp = new User(null,userPreferencesDataSource.getUserEmail(),userPreferencesDataSource.getUserName(),null,0);
 
                     Call<User> userCreateCall = ServerCommunicationManager.getDbInterface().CreateUser(temp);
                     userCreateCall.enqueue(new Callback<User>() {
@@ -122,6 +122,9 @@ public class LaunchFragment extends Fragment {
                                 //TODO: Error handling on failed user creation
                             }
 
+                            // Store the database id in user preferences
+                            userPreferencesDataSource.setUserDatabaseUuid(response.body().dbID);
+
                             Log.d(this.getClass().getName(), "User created successfully!");
                         }
 
@@ -131,13 +134,12 @@ public class LaunchFragment extends Fragment {
                         }
                     });
 
-
+                Log.d(this.getClass().getSimpleName(),"USER DB ID = "+userPreferencesDataSource.getUserDatabaseID());
 
                 if(UserManager.user == null)
-                    UserManager.user = new User(userPreferencesDataSource.getUserEmail(),userPreferencesDataSource.getUserName());
+                    UserManager.user = new User(null,userPreferencesDataSource.getUserEmail(),userPreferencesDataSource.getUserName(),null,0);
 
-                UserManager.SyncWithDB(); // get the details from db and sync with user object
-
+                UserManager.SyncWithDB(userPreferencesDataSource.getUserDatabaseID()); // get the details from db and sync with user object
 
 
                 // Switch to next View
@@ -158,8 +160,8 @@ public class LaunchFragment extends Fragment {
         if(!userPreferencesDataSource.getUserName().isEmpty() && !userPreferencesDataSource.getUserEmail().isEmpty()) {
 
             if(UserManager.user == null)
-                UserManager.user = new User(userPreferencesDataSource.getUserEmail(),userPreferencesDataSource.getUserName());
-            UserManager.SyncWithDB(); // get the details from db and sync with user object
+                UserManager.user = new User(null,userPreferencesDataSource.getUserEmail(),userPreferencesDataSource.getUserName(),null,0);
+            UserManager.SyncWithDB(userPreferencesDataSource.getUserDatabaseID()); // get the details from db and sync with user object
 
             Navigation.findNavController(view)
                       .navigate(R.id.action_launchFragment_to_homeScreenFragment);

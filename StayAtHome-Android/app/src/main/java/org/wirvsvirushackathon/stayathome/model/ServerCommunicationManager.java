@@ -8,6 +8,7 @@ import androidx.preference.PreferenceManager;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.SerializedName;
 
 import org.wirvsvirushackathon.stayathome.data.User;
 
@@ -30,6 +31,9 @@ public class ServerCommunicationManager {
     private static final String BASE_URL = "https://stayathome-a828.restdb.io/rest/";
     private SharedPreferences preferences;
     private Context applicationContext;
+
+
+
 
 
     public ServerCommunicationManager(Context context){
@@ -70,6 +74,7 @@ public class ServerCommunicationManager {
 
             Gson gson = new GsonBuilder()
                     .setLenient()
+
                     .create();
 
             retrofit = new retrofit2.Retrofit.Builder()
