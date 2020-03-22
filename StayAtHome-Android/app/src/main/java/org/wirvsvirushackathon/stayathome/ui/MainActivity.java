@@ -65,12 +65,6 @@ public class MainActivity extends AppCompatActivity {
                                               new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION},
                                               1);
         }
-
-        if(Build.VERSION.SDK_INT >= 26) {
-            startForegroundService(new Intent(this, BackgroundService.class));
-        } else {
-            startService(new Intent(this, BackgroundService.class));
-        }
     }
 
     public void hideNavbar() {

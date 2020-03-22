@@ -2,6 +2,8 @@ package org.wirvsvirushackathon.stayathome.ui;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.wirvsvirushackathon.stayathome.R;
+import org.wirvsvirushackathon.stayathome.background.BackgroundService;
 import org.wirvsvirushackathon.stayathome.data.PointsSharedPreferencesDataSource;
 
 import org.wirvsvirushackathon.stayathome.data.User;
@@ -45,6 +48,16 @@ public class HomeFragment extends Fragment implements PointsSharedPreferencesDat
 
     public HomeFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(Build.VERSION.SDK_INT >= 26) {
+            requireActivity().startForegroundService(new Intent(requireContext(), BackgroundService.class));
+        } else {
+            requireActivity().startService(new Intent(requireContext(), BackgroundService.class));
+        }
     }
 
     @Override
