@@ -15,6 +15,17 @@
 		732DA80824273A4A00417BD3 /* LocationPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732DA80724273A4A00417BD3 /* LocationPermissionViewController.swift */; };
 		732DA80A24273AA000417BD3 /* AcceptWIFIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732DA80924273AA000417BD3 /* AcceptWIFIViewController.swift */; };
 		732DA80C2427403000417BD3 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732DA80B2427403000417BD3 /* StartViewController.swift */; };
+		732DA80F2427596200417BD3 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 732DA80E2427596200417BD3 /* Onboarding.storyboard */; };
+		732DA81124275A9900417BD3 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732DA81024275A9900417BD3 /* FriendsViewController.swift */; };
+		732DA81324275AA400417BD3 /* ChallengesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732DA81224275AA400417BD3 /* ChallengesViewController.swift */; };
+		732DA81524275AAF00417BD3 /* LeaderBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732DA81424275AAF00417BD3 /* LeaderBoardViewController.swift */; };
+		732DA81724275F7E00417BD3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732DA81624275F7E00417BD3 /* SettingsViewController.swift */; };
+		732DA81C24278B9900417BD3 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 732DA81B24278B0A00417BD3 /* Roboto-Regular.ttf */; };
+		732DA81D24278B9900417BD3 /* FredokaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 732DA81A24278ABD00417BD3 /* FredokaOne-Regular.ttf */; };
+		732DA81E24278B9900417BD3 /* Chewy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 732DA81824278A1100417BD3 /* Chewy.ttf */; };
+		732DA8202427AB8800417BD3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732DA81F2427AB8800417BD3 /* ImagePicker.swift */; };
+		732DA8232427B81300417BD3 /* LightRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732DA8222427B81300417BD3 /* LightRoundButton.swift */; };
+		732DA8252427B8A500417BD3 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 732DA8242427B8A500417BD3 /* Colors.xcassets */; };
 		7390065C24263E0E00B9EEC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7390065B24263E0E00B9EEC5 /* AppDelegate.swift */; };
 		7390066324263E0E00B9EEC5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7390066124263E0E00B9EEC5 /* Main.storyboard */; };
 		7390066524263E0F00B9EEC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7390066424263E0F00B9EEC5 /* Assets.xcassets */; };
@@ -36,6 +47,17 @@
 		732DA80724273A4A00417BD3 /* LocationPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermissionViewController.swift; sourceTree = "<group>"; };
 		732DA80924273AA000417BD3 /* AcceptWIFIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptWIFIViewController.swift; sourceTree = "<group>"; };
 		732DA80B2427403000417BD3 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		732DA80E2427596200417BD3 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		732DA81024275A9900417BD3 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		732DA81224275AA400417BD3 /* ChallengesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengesViewController.swift; sourceTree = "<group>"; };
+		732DA81424275AAF00417BD3 /* LeaderBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardViewController.swift; sourceTree = "<group>"; };
+		732DA81624275F7E00417BD3 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		732DA81824278A1100417BD3 /* Chewy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chewy.ttf; sourceTree = "<group>"; };
+		732DA81A24278ABD00417BD3 /* FredokaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FredokaOne-Regular.ttf"; sourceTree = "<group>"; };
+		732DA81B24278B0A00417BD3 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		732DA81F2427AB8800417BD3 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		732DA8222427B81300417BD3 /* LightRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightRoundButton.swift; sourceTree = "<group>"; };
+		732DA8242427B8A500417BD3 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		7390065824263E0E00B9EEC5 /* StayAtHome-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "StayAtHome-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7390065B24263E0E00B9EEC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7390066224263E0E00B9EEC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -77,11 +99,43 @@
 			children = (
 				732DA7FF2427342800417BD3 /* OnboardingViewController.swift */,
 				732DA805242739E700417BD3 /* UserDataViewController.swift */,
+				732DA81F2427AB8800417BD3 /* ImagePicker.swift */,
 				732DA80724273A4A00417BD3 /* LocationPermissionViewController.swift */,
 				732DA80924273AA000417BD3 /* AcceptWIFIViewController.swift */,
 				732DA80B2427403000417BD3 /* StartViewController.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		732DA80D2427594800417BD3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				732DA81924278A1500417BD3 /* fonts */,
+				7390066124263E0E00B9EEC5 /* Main.storyboard */,
+				7390066424263E0F00B9EEC5 /* Assets.xcassets */,
+				7390066624263E0F00B9EEC5 /* LaunchScreen.storyboard */,
+				732DA80E2427596200417BD3 /* Onboarding.storyboard */,
+				732DA8242427B8A500417BD3 /* Colors.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		732DA81924278A1500417BD3 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				732DA81B24278B0A00417BD3 /* Roboto-Regular.ttf */,
+				732DA81A24278ABD00417BD3 /* FredokaOne-Regular.ttf */,
+				732DA81824278A1100417BD3 /* Chewy.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		732DA8212427B7F100417BD3 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				732DA8222427B81300417BD3 /* LightRoundButton.swift */,
+			);
+			path = "Custom Views";
 			sourceTree = "<group>";
 		};
 		7390064F24263E0D00B9EEC5 = {
@@ -104,15 +158,14 @@
 		7390065A24263E0E00B9EEC5 /* StayAtHome-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				732DA80D2427594800417BD3 /* Resources */,
 				732DA7FE24272ECB00417BD3 /* Onboarding */,
 				732DA7FB24272AB700417BD3 /* Util */,
 				739006912427249C00B9EEC5 /* Managers */,
 				7390068E24269BDD00B9EEC5 /* Main */,
+				732DA8212427B7F100417BD3 /* Custom Views */,
 				7390066F24264D0A00B9EEC5 /* StayAtHome-iOS.entitlements */,
 				7390065B24263E0E00B9EEC5 /* AppDelegate.swift */,
-				7390066124263E0E00B9EEC5 /* Main.storyboard */,
-				7390066424263E0F00B9EEC5 /* Assets.xcassets */,
-				7390066624263E0F00B9EEC5 /* LaunchScreen.storyboard */,
 				7390066924263E0F00B9EEC5 /* Info.plist */,
 			);
 			path = "StayAtHome-iOS";
@@ -130,6 +183,10 @@
 			isa = PBXGroup;
 			children = (
 				7390068F24269C0000B9EEC5 /* MainViewController.swift */,
+				732DA81024275A9900417BD3 /* FriendsViewController.swift */,
+				732DA81224275AA400417BD3 /* ChallengesViewController.swift */,
+				732DA81424275AAF00417BD3 /* LeaderBoardViewController.swift */,
+				732DA81624275F7E00417BD3 /* SettingsViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -206,7 +263,12 @@
 			files = (
 				7390066824263E0F00B9EEC5 /* LaunchScreen.storyboard in Resources */,
 				7390066524263E0F00B9EEC5 /* Assets.xcassets in Resources */,
+				732DA81C24278B9900417BD3 /* Roboto-Regular.ttf in Resources */,
+				732DA81E24278B9900417BD3 /* Chewy.ttf in Resources */,
 				7390066324263E0E00B9EEC5 /* Main.storyboard in Resources */,
+				732DA8252427B8A500417BD3 /* Colors.xcassets in Resources */,
+				732DA80F2427596200417BD3 /* Onboarding.storyboard in Resources */,
+				732DA81D24278B9900417BD3 /* FredokaOne-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,11 +279,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				732DA81524275AAF00417BD3 /* LeaderBoardViewController.swift in Sources */,
+				732DA8232427B81300417BD3 /* LightRoundButton.swift in Sources */,
 				732DA802242734CB00417BD3 /* GameCoordinator.swift in Sources */,
+				732DA81124275A9900417BD3 /* FriendsViewController.swift in Sources */,
 				732DA80C2427403000417BD3 /* StartViewController.swift in Sources */,
 				7390065C24263E0E00B9EEC5 /* AppDelegate.swift in Sources */,
 				732DA80824273A4A00417BD3 /* LocationPermissionViewController.swift in Sources */,
 				732DA80A24273AA000417BD3 /* AcceptWIFIViewController.swift in Sources */,
+				732DA8202427AB8800417BD3 /* ImagePicker.swift in Sources */,
 				732DA8042427391C00417BD3 /* UIStoryboardExtension.swift in Sources */,
 				7390067424266C4500B9EEC5 /* ManagerProvider.swift in Sources */,
 				73900693242724BF00B9EEC5 /* WifiManager.swift in Sources */,
@@ -230,7 +296,9 @@
 				732DA7FD24272AC100417BD3 /* Constants.swift in Sources */,
 				7390069024269C0000B9EEC5 /* MainViewController.swift in Sources */,
 				732DA806242739E700417BD3 /* UserDataViewController.swift in Sources */,
+				732DA81324275AA400417BD3 /* ChallengesViewController.swift in Sources */,
 				739006972427251300B9EEC5 /* LocationManager.swift in Sources */,
+				732DA81724275F7E00417BD3 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,10 +19,10 @@ protocol OnboardingChild: class {
 
 class OnboardingViewController: UIViewController {
 
-    let startViewController = UIStoryboard.main.instantiateViewController(withIdentifier: Constants.Storyboards.ViewController.Onboarding.start)
-    let userDataViewController = UIStoryboard.main.instantiateViewController(withIdentifier: Constants.Storyboards.ViewController.Onboarding.userData)
-    let locationPermissionViewController = UIStoryboard.main.instantiateViewController(withIdentifier: Constants.Storyboards.ViewController.Onboarding.locationPermission)
-    let acceptWIFIViewController = UIStoryboard.main.instantiateViewController(withIdentifier: Constants.Storyboards.ViewController.Onboarding.acceptWIFI)
+    let startViewController = UIStoryboard.onboarding.instantiateViewController(withIdentifier: Constants.Storyboards.ViewController.Onboarding.start)
+    let userDataViewController = UIStoryboard.onboarding.instantiateViewController(withIdentifier: Constants.Storyboards.ViewController.Onboarding.userData)
+    let locationPermissionViewController = UIStoryboard.onboarding.instantiateViewController(withIdentifier: Constants.Storyboards.ViewController.Onboarding.locationPermission)
+    let acceptWIFIViewController = UIStoryboard.onboarding.instantiateViewController(withIdentifier: Constants.Storyboards.ViewController.Onboarding.acceptWIFI)
     
     var pageViewController: UIPageViewController?
     
@@ -45,6 +45,10 @@ class OnboardingViewController: UIViewController {
         
         checkIfAllScreensAreDone()
             
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
     }
     
     func setupViewControllers() {

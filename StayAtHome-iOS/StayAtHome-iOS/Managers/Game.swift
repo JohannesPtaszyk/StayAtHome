@@ -9,6 +9,7 @@ enum GameState {
     case disconnected
 }
 
+
 class Game {
     
     var timer: Timer?
@@ -20,22 +21,35 @@ class Game {
         user?.score ?? 0
     }
     
+    private var gameOperationQueue = OperationQueue()
+    
     func startGame(for user: User) {
+        
         self.user = user
         
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] (timer) in
-            guard let strongSelf = self else { return }
-            guard let user = strongSelf.user else { return }
+        gameOperationQueue.addOperation { [weak self] in
             
-            if strongSelf.shouldScorePoints() {
-                user.score += 1
-                strongSelf.delegate?.game(strongSelf, stateChanged: .connected)
-            } else {
-                strongSelf.delegate?.game(strongSelf, stateChanged: .disconnected)
+            while true {
+                
+                guard let strongSelf = self else { return }
+                guard let user = strongSelf.user else { return }
+                
+                if strongSelf.shouldScorePoints() {
+                    user.score += 1
+                    DispatchQueue.main.async {
+                        strongSelf.delegate?.game(strongSelf, stateChanged: .connected)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        strongSelf.delegate?.game(strongSelf, stateChanged: .disconnected)
+                    }
+                }
+                
+                sleep(UInt32(Constants.Game.timerSpeed))
             }
             
-            
         }
+        
     }
     
     func shouldScorePoints() -> Bool {
@@ -44,6 +58,17 @@ class Game {
     
     func hasWifi() -> Bool {
         return ManagerProvider.shared.wifiManager.getWiFiSsid() != nil
+    }
+    
+    func generateRandomCheer() -> String {
+        [
+            "WoooooooW",
+            "Weiter soooooo!",
+            "Du hast es echt drauf, diggi!",
+            "Alter falter wie gehst du den ab?!",
+            "Schau dir den an.",
+            "Hast du dafür eine Ausbildung gemacht?"
+        ].randomElement() ?? "WoooooW"
     }
     
 }

@@ -24,12 +24,24 @@ enum ReceiveSSIDError {
     }
 }
 
+enum Level: Int {
+    case dayfly = 0
+    
+    var title: String {
+        switch self {
+        case .dayfly:
+            return "Eintagsfliege".uppercased()
+        }
+    }
+}
+
 class User {
     var username: String
     var email: String
     var score: Int
     var image: UIImage?
     var wifiName: String?
+    var level: Level = .dayfly
     
     init(username: String, email: String, score: Int) {
         self.username = username
@@ -59,6 +71,8 @@ class UserDataProvider {
                 user.image = UIImage(data: data)
             }
             
+            user.level = Level(rawValue: UserDefaults.standard.integer(forKey: Constants.User.level)) ?? .dayfly
+            
             completion(.success(user))
             return
         }
@@ -73,6 +87,7 @@ class UserDataProvider {
         UserDefaults.standard.set(user.email, forKey: Constants.User.emailKey)
         UserDefaults.standard.set(user.image?.pngData(), forKey: Constants.User.imageKey)
         UserDefaults.standard.set(user.wifiName, forKey: Constants.User.wifiName)
+        UserDefaults.standard.set(user.level.rawValue, forKey: Constants.User.level)
     }
     
 }

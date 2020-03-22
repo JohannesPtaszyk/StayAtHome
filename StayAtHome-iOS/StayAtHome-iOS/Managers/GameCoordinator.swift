@@ -38,6 +38,7 @@ class GameCoordinator {
         user?.wifiName = wifiName
         user?.image = userImage
         
+        //TODO: fix this warning
         guard let user = user, let window = UIApplication.shared.keyWindow else {
             return
         }
@@ -67,7 +68,7 @@ class GameCoordinator {
     }
     
     func displayOnboarding(in window: UIWindow) {
-        guard let onboardingViewController = UIStoryboard(name: Constants.Storyboards.main, bundle: nil).instantiateViewController(withIdentifier: Constants.Storyboards.ViewController.OnboardingViewController) as? OnboardingViewController else {
+        guard let onboardingViewController = UIStoryboard(name: Constants.Storyboards.onboarding, bundle: nil).instantiateViewController(withIdentifier: Constants.Storyboards.ViewController.OnboardingViewController) as? OnboardingViewController else {
             return
         }
         

@@ -20,10 +20,21 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Zugriff wird benötigt um dein Profilbild auszusuchen</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>For tracking your location and accessing Wifi Settings</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>For tracking your location and accessing Wifi Settings</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Zugriff wird benötigt um dein Profilbild auszusuchen</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string></string>
+		<string>Chewy.ttf</string>
+		<string>FredokaOne-Regular.ttf</string>
+		<string>Roboto-Regular.ttf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
@@ -39,8 +50,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
