@@ -18,8 +18,8 @@
 		tools:layout = "@layout/fragment_launch" >
 		<action
 			android:id = "@+id/action_launchFragment_to_homeScreenFragment"
-			app:destination = "@id/homeFragment"
-			app:popUpTo="@+id/navigation"
+			app:destination = "@id/selectHomeFragment"
+			app:popUpTo="@id/navigation"
 			app:popUpToInclusive="true" />
 	</fragment>
 	<fragment
@@ -27,4 +27,22 @@
 		android:name = "org.wirvsvirushackathon.stayathome.ui.UserFragment"
 		android:label = "fragment_user"
 		tools:layout = "@layout/fragment_user" />
+	<fragment
+		android:id="@+id/selectHomeFragment"
+		android:name="org.wirvsvirushackathon.stayathome.ui.SelectHomeFragment"
+		android:label="fragment_select_home"
+		tools:layout="@layout/fragment_select_home" >
+		<action
+			android:id="@+id/action_selectHomeFragment_to_selectWifiFragment"
+			app:destination="@id/selectWifiFragment" />
+	</fragment>
+	<fragment
+		android:id="@+id/selectWifiFragment"
+		android:name="org.wirvsvirushackathon.stayathome.ui.SelectWifiFragment"
+		android:label="fragment_select_wifi"
+		tools:layout="@layout/fragment_select_wifi" >
+		<action
+			android:id="@+id/action_selectWifiFragment_to_homeFragment"
+			app:destination="@id/homeFragment" />
+	</fragment>
 </navigation>

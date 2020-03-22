@@ -3,7 +3,6 @@ package org.wirvsvirushackathon.stayathome.model;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
 
@@ -60,6 +59,23 @@ public class ServerCommunicationManager {
         }
     }
 
+    public static Retrofit getRetrofitInstance() {
+
+        if (retrofit == null) {
+
+            Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();
+
+            retrofit = new retrofit2.Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
+        }
+
+        return retrofit;
+    }
+
 
     public static void GetHighScore(int maxValues){
         //TODO: implement
@@ -73,6 +89,7 @@ public class ServerCommunicationManager {
         //TODO: implement
     }
 
+    /*
     public static void CreateUser(String name,String email){
         //TODO: implement
 
@@ -96,7 +113,7 @@ public class ServerCommunicationManager {
             }
         });
 
-    }
+    }*/
 
     public static void GetUserRank(int userID){
         //TODO: implement

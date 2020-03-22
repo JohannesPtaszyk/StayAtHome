@@ -27,6 +27,30 @@
 		app:srcCompat = "@drawable/ic_home_klecks_2" />
 
 	<TextView
+		android:id="@+id/userName"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="32dp"
+		android:text="Brokkoli_Ramona"
+		android:textSize="24dp"
+		android:textColor="#191919"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.498"
+		app:layout_constraintStart_toStartOf="parent" />
+
+	<TextView
+		android:id="@+id/userStatus"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="8dp"
+		android:text="Couch Potato Level 1"
+		android:textColor="#232323"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/userName" />
+
+
+	<TextView
 		android:id = "@+id/tv_points"
 		android:layout_width = "match_parent"
 		android:layout_height = "100dp"
