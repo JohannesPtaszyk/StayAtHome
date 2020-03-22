@@ -25,10 +25,44 @@ public class UserManager {
 
     public static void SyncWithDB(String uuid){
 
+        if(uuid==null)
+        {
+            Log.e(UserManager.class.getSimpleName(),"UUID EMPTY");
+            return;
+
+        }
+
         Log.d(UserManager.class.getSimpleName(),"Sync User with Database by uuid="+uuid);
 
-        Call<User>  getUser = ServerCommunicationManager.getDbInterface().getUserByID(uuid);
-        getUser.enqueue(new Callback<User>() {
+        Call<User> getUser = ServerCommunicationManager.getDbInterface().getUserByID(uuid);
+        Call<List<User>> getUsers = ServerCommunicationManager.getDbInterface().getUsersByID(uuid);
+
+        getUsers.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+
+                if(!response.isSuccessful())
+                {
+                    Log.e(UserManager.class.getSimpleName(),"Response not successfull "+response.message());
+                    return;
+                }
+
+                for(User u : response.body()){
+
+                    Log.d(UserManager.class.getSimpleName(),u.name);
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+
+            }
+        });
+
+
+        /*getUser.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
 
@@ -49,7 +83,8 @@ public class UserManager {
 
             }
         });
-
+        */
+        if(UserManager.user!=null)
         UserManager.user.dbID = uuid;
 
 

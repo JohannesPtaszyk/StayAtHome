@@ -89,26 +89,28 @@ public class HomeFragment extends Fragment implements PointsSharedPreferencesDat
     @Override
     public void onPointsUpdated(int points) {
         pointsView.setText(String.valueOf(points));
+        userStatusView.setText(computePlayerRankingFromScore(points).getName());
 
+        Log.d(getClass().getSimpleName(),userPreferencesDataSource.getUserDatabaseID());
 
         // Make sure the user is up to date
-        UserManager.SyncWithDB(userPreferencesDataSource.getUserDatabaseID());
+        if(userPreferencesDataSource.getUserDatabaseID() == null){
 
-        System.out.println(UserManager.user.toString());
-
+            Log.e(HomeFragment.class.getSimpleName(),"Cant update motionscore. No UUID provided");
+            return;
+        }
         // Synchronize with Database
         UserManager.user.motionscore=points;
 
         Log.d(getClass().getSimpleName(),"try update motionscore for user id = "+userPreferencesDataSource.getUserDatabaseID() + " with score = "+points);
 
         // make sure PATCH will only manipulate motionscore
-        User temp = new User(null,null,null,null,points);
+        User temp = new User(null,UserManager.user.email, UserManager.user.name,null,points);
 
-        Call<Void> updateUserCall = ServerCommunicationManager.getDbInterface().UpdateUser(userPreferencesDataSource.getUserDatabaseID(),temp);
-
-        updateUserCall.enqueue(new Callback<Void>() {
+        Call<User> updateUserCall = ServerCommunicationManager.getDbInterface().UpdateUser(userPreferencesDataSource.getUserDatabaseID(),temp);
+        updateUserCall.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
                 if(!response.isSuccessful()){
 
                     Log.e(getClass().getSimpleName(),"error updating motionscore");
@@ -119,14 +121,13 @@ public class HomeFragment extends Fragment implements PointsSharedPreferencesDat
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 Log.e(getClass().getSimpleName(),"error updating motionscore");
             }
         });
 
 
 
-        userStatusView.setText(computePlayerRankingFromScore(points).getName());
 
     }
 

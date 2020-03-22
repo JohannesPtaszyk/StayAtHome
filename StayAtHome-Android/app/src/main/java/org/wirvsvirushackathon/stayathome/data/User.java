@@ -1,6 +1,7 @@
 package org.wirvsvirushackathon.stayathome.data;
 
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class User {
@@ -21,6 +22,11 @@ public class User {
     @SerializedName("motionscore")
     public int motionscore;
 
+
+    public User(String email, String name) {
+        this.email = email;
+        this.name = name;
+    }
 
     public User(String dbID, String email, String name, String rank, int motionscore) {
         this.dbID = dbID;
