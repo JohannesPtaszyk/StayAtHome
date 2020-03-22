@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class User {
 
+
     public int id;
 
     @SerializedName("email")
@@ -21,10 +22,18 @@ public class User {
 
 
 
-    public User(String email, int motionscore, String name, String rank) {
+    public User(String email, String name, int motionscore, String rank) {
         this.email = email;
         this.motionscore = motionscore;
         this.rank = rank;
         this.name = name;
     }
+
+    public User(String email, String name) {
+        this.email = email;
+        this.motionscore = 0;
+        this.rank = "";
+        this.name = name;
+    }
+
 }

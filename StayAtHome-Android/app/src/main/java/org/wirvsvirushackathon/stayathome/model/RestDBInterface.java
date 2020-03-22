@@ -6,8 +6,13 @@ import org.wirvsvirushackathon.stayathome.data.User;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface RestDBInterface {
 
@@ -23,5 +28,22 @@ public interface RestDBInterface {
     @GET("challenges")
     Call<List<Challenges>> getChallenges();
 
+
+    @GET("appusers")
+    @Headers({
+            "x-apikey: 93f0d1cfad5791c5d04bb8a85ceee8810b78a",
+            "Content-Type: application/json",
+            "cache-control:no-cache"
+    })
+    Call<List<User>>  getUserByMail(@Query("email") String email);
+
+
+    @POST("appusers")
+    @Headers({
+            "x-apikey: 93f0d1cfad5791c5d04bb8a85ceee8810b78a",
+            "Content-Type: application/json",
+            "cache-control:no-cache"
+    })
+    Call<User> CreateUser(@Body User user);
 
 }

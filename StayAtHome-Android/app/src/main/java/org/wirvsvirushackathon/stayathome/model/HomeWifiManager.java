@@ -109,6 +109,16 @@ public class HomeWifiManager {
         return hexString.toString();
     }
 
+    public boolean isHomeWifiAlreadySet() {
+        String
+                wifiSSIDHashStored
+                = preferences.getString(KEY_HOME_WIFI_HASH, "");
+        if (wifiSSIDHashStored != null && !wifiSSIDHashStored.isEmpty()) {
+            return true;
+        }
+        else return false;
+    }
+
     public boolean isConnectedToHomeWifi() {
         if (isConnectedToWifi()) {
             //Wifi auslesen und hash erstellen
@@ -135,5 +145,9 @@ public class HomeWifiManager {
         }
         Log.d(DEBUG_TAG, "isConnectedToHomeWifi: Keine WLAN Verbindung");
         return false;
+    }
+
+    public boolean isWifiEnabled() {
+        return wifiManager.isWifiEnabled();
     }
 }
