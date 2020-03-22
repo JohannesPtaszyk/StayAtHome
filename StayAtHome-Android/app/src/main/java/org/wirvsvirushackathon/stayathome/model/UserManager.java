@@ -25,31 +25,44 @@ public class UserManager {
 
     public static void SyncWithDB(String uuid){
 
+        if(uuid==null)
+        {
+            Log.e(UserManager.class.getSimpleName(),"UUID EMPTY");
+            return;
+
+        }
+
         Log.d(UserManager.class.getSimpleName(),"Sync User with Database by uuid="+uuid);
 
-        Call<User>  getUser = ServerCommunicationManager.getDbInterface().getUserByID(uuid);
-        getUser.enqueue(new Callback<User>() {
+
+        Call <List<User>> getUser = ServerCommunicationManager.getDbInterface().getUserByID(uuid);
+
+        getUser.enqueue(new Callback<List<User>>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
 
                 if(!response.isSuccessful())
                 {
-                    Log.e(UserManager.class.getSimpleName(),"Response not successfull "+response);
+                    Log.e(UserManager.class.getSimpleName(),"Response not successfull "+response.message());
+                    return;
                 }
+                Log.e(UserManager.class.getSimpleName(),"Response asda successfull "+response.body().size());
+                for(User u : response.body()){
 
-                UserManager.user = response.body();
+                    Log.d(UserManager.class.getSimpleName(),u.toString());
+
+                }
 
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
-
-                Log.e(UserManager.class.getSimpleName(),t.getMessage());
-                Log.e(UserManager.class.getSimpleName(),t.toString());
+            public void onFailure(Call<List<User>> call, Throwable t) {
 
             }
         });
 
+
+        if(UserManager.user!=null)
         UserManager.user.dbID = uuid;
 
 

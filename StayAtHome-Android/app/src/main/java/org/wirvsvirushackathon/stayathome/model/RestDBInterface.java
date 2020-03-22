@@ -8,6 +8,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
@@ -31,13 +32,22 @@ public interface RestDBInterface {
     Call<List<Challenges>> getChallenges();
 
 
-    @GET("appusers")
+
+    @GET("appusers/{id}")
     @Headers({
             "x-apikey: 93f0d1cfad5791c5d04bb8a85ceee8810b78a",
             "Content-Type: application/json",
             "cache-control:no-cache"
     })
-    Call<User> getUserByID(@Query("id") String id);
+    Call<List<User>> getUserByID(@Path("id") String id);
+
+    @GET("appusers/{id}")
+    @Headers({
+            "x-apikey: 93f0d1cfad5791c5d04bb8a85ceee8810b78a",
+            "Content-Type: application/json",
+            "cache-control:no-cache"
+    })
+    Call<List<User>> getUsersByID(@Path("id") String id);
 
 
     @POST("appusers")
@@ -55,6 +65,18 @@ public interface RestDBInterface {
             "Content-Type: application/json",
             "cache-control:no-cache"
     })
-    Call<Void> UpdateUser(@Path("id") String id,@Body User user);
+    Call<User> UpdateUser(@Path("id") String id,@Body User user);
+
+
+
+    @PATCH("appusers")
+    @Headers({
+            "x-apikey: 93f0d1cfad5791c5d04bb8a85ceee8810b78a",
+            "Content-Type: application/json",
+            "cache-control:no-cache"
+    })
+    Call<User> UpdateUser(@Body User user);
+
+
 
 }

@@ -19,6 +19,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
+
 
 /**
  * Class providing static functions to receive or send data to restDB Database
@@ -74,11 +76,11 @@ public class ServerCommunicationManager {
 
             Gson gson = new GsonBuilder()
                     .setLenient()
-
                     .create();
 
             retrofit = new retrofit2.Retrofit.Builder()
                     .baseUrl(BASE_URL)
+                    .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
         }

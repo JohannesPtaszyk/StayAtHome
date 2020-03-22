@@ -52,7 +52,8 @@ dependencies {
 
     // Retrofit2 HTTP Requests
     implementation 'com.squareup.retrofit2:retrofit:2.7.2'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.2'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.7.2'
 
     //Location
     implementation 'com.google.android.gms:play-services-location:17.0.0'
