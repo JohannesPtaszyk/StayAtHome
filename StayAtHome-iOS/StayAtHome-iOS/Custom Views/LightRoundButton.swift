@@ -13,19 +13,27 @@ class LightRoundButton: UIButton {
         super.init(coder: coder)
         setup()
     }
-    
+
+    @IBInspectable
+    var equalEdgeInset: CGFloat = 0
+
+    @IBInspectable
+    var cornerRadius: CGFloat = 16
     
     func setup() {
         
-        let equalEdgeInsets: CGFloat = 16
-        titleEdgeInsets = UIEdgeInsets(top: equalEdgeInsets, left: equalEdgeInsets, bottom: equalEdgeInsets, right: equalEdgeInsets)
-        backgroundColor = UIColor(named: "azure")
-        titleLabel?.font = UIFont(name: "FredokaOne-Regular", size: 30)
-        layer.cornerRadius = 16
+        titleEdgeInsets = UIEdgeInsets(top: equalEdgeInset, left: equalEdgeInset, bottom: equalEdgeInset, right: equalEdgeInset)
+        
+        layer.cornerRadius = cornerRadius
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        setup()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         setup()
     }
 }

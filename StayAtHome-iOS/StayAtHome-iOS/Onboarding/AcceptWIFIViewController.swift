@@ -6,14 +6,15 @@ class AcceptWIFIViewController: UIViewController, OnboardingChild {
     weak var delegate: OnboardingDelegate?
     var parentOnboardingViewController: OnboardingViewController?
     
-    @IBOutlet weak var acceptWifiSwitch: UISwitch!
-    @IBOutlet weak var wifiNameLabel: UILabel!
-    
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var switchDescriptionLabel: UILabel!
+    @IBOutlet weak var acceptWifiButton: LightRoundButton!
+    var wifiName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        acceptWifiButton.isEnabled = false
         
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil) { [weak self] (notificaiton) in
             self?.receiveWifiName()
@@ -23,16 +24,6 @@ class AcceptWIFIViewController: UIViewController, OnboardingChild {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         receiveWifiName()
-    }
-    
-    @IBAction func acceptWifiSwitchValueChanged(_ sender: Any) {
-        if acceptWifiSwitch.isOn {
-            state = .done
-        } else {
-            state = .none
-        }
-        
-        delegate?.stateChanged(self, to: state)
     }
     
     func receiveWifiName() {
@@ -53,18 +44,22 @@ class AcceptWIFIViewController: UIViewController, OnboardingChild {
                     
                     break
                 }
-                strongSelf.acceptWifiSwitch.isEnabled = false
                 strongSelf.switchDescriptionLabel.isEnabled = false
-                strongSelf.wifiNameLabel.text = "--"
+                strongSelf.acceptWifiButton.isEnabled = false
                 return
             }
-            
-            strongSelf.switchDescriptionLabel.isEnabled = true
-            strongSelf.acceptWifiSwitch.isEnabled = true
-            strongSelf.headerLabel.text = "Ist das dein Wifi Zuhause?"
-            strongSelf.wifiNameLabel.text = ssid
+            strongSelf.wifiName = ssid
+            strongSelf.acceptWifiButton.isEnabled = true
         })
     }
     
-
+    
+    @IBAction func acceptWifiButtonTapped(_ sender: Any) {
+        state = .done
+        delegate?.stateChanged(self, to: state)
+        acceptWifiButton.isEnabled = false
+        acceptWifiButton.setTitle("Super, danke!", for: .disabled)
+        acceptWifiButton.backgroundColor = acceptWifiButton.backgroundColor?.withAlphaComponent(0.5)
+    }
+    
 }
