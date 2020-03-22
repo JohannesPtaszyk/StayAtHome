@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import org.wirvsvirushackathon.stayathome.R;
@@ -54,21 +55,17 @@ public class SelectWifiFragment extends Fragment {
         final View root = inflater.inflate(R.layout.fragment_select_wifi,
                 container,
                 false);
-        final SwitchMaterial switchActivateWifi = root.findViewById(R.id.selectWifi_activateWifi);
-        switchActivateWifi.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-
-                if(myHomeWifiManager.isWifiEnabled() && myHomeWifiManager.isConnectedToWifi()) {
-                    setHomeWifiAndRedirect(root);
+        final MaterialButton switchActivateWifi = root.findViewById(R.id.selectWifi_activateWifi);
+        switchActivateWifi.setOnClickListener((buttonView) -> {
+            if (myHomeWifiManager.isWifiEnabled() && myHomeWifiManager.isConnectedToWifi()) {
+                setHomeWifiAndRedirect(root);
+            } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    showWifiSettingsForAndroidQ();
                 } else {
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        showWifiSettingsForAndroidQ();
-                    } else {
-                        enableWifiForAndroidBelowQ(mainActivity, root);
-                    }
-                    switchActivateWifi.setChecked(false);
+                    enableWifiForAndroidBelowQ(mainActivity, root);
                 }
-
+                switchActivateWifi.setChecked(false);
             }
         });
         return root;
