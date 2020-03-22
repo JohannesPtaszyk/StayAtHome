@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import org.wirvsvirushackathon.stayathome.R;
 import org.wirvsvirushackathon.stayathome.data.PointsSharedPreferencesDataSource;
+import org.wirvsvirushackathon.stayathome.data.UserPreferencesDataSource;
 import org.wirvsvirushackathon.stayathome.model.HomeWifiManager;
 import org.wirvsvirushackathon.stayathome.model.UserManager;
 
@@ -27,6 +28,7 @@ public class HomeFragment extends Fragment implements PointsSharedPreferencesDat
 
     private PointsSharedPreferencesDataSource pointsSharedPreferences;
     private TextView pointsView;
+    private TextView userNameView;
 
     private long millisLastWifiTurnOnMsg = 0;
     private long millisWifiTurnOnMsgTimeout = 180000;
@@ -44,11 +46,15 @@ public class HomeFragment extends Fragment implements PointsSharedPreferencesDat
         View root = inflater.inflate(R.layout.fragment_home,
                                 container,
                                 false);
+
+        UserPreferencesDataSource myUserPrefSource = new UserPreferencesDataSource(this.getContext());
+
         this.pointsView = root.findViewById(R.id.tv_points);
         this.pointsSharedPreferences = new PointsSharedPreferencesDataSource(requireContext());
         pointsView.setText(String.valueOf(pointsSharedPreferences.getCurrentPoints()));
         pointsSharedPreferences.addCallback(this);
-
+        this.userNameView = root.findViewById(R.id.tv_userName);
+        this.userNameView.setText(myUserPrefSource.getUserName());
 
         return root;
     }
