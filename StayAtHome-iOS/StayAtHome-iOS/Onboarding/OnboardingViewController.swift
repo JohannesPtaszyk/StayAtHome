@@ -90,7 +90,7 @@ class OnboardingViewController: UIViewController {
         }
         
         if let acceptWifiViewController = acceptWIFIViewController as? AcceptWIFIViewController {
-            wifiName = acceptWifiViewController.wifiNameLabel.text!
+            wifiName = acceptWifiViewController.wifiName!
         }
         
         gameCoordinator?.presentGameFromOnboarding(withUserName: username, email: email, userImage: userImage, wifiName: wifiName)

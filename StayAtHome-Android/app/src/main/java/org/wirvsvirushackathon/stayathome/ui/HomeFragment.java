@@ -27,6 +27,7 @@ import org.wirvsvirushackathon.stayathome.data.User;
 import org.wirvsvirushackathon.stayathome.data.UserPreferencesDataSource;
 
 import org.wirvsvirushackathon.stayathome.model.HomeWifiManager;
+import org.wirvsvirushackathon.stayathome.model.PlayerRanking;
 import org.wirvsvirushackathon.stayathome.model.ServerCommunicationManager;
 import org.wirvsvirushackathon.stayathome.model.UserManager;
 
@@ -109,8 +110,20 @@ public class HomeFragment extends Fragment implements PointsSharedPreferencesDat
             }
         });
 
+        userStatusView.setText(computePlayerRankingFromScore(points).getName());
 
         Log.d(this.getClass().getName(),UserManager.user.name);
+    }
+
+    private PlayerRanking computePlayerRankingFromScore(final int score) {
+        PlayerRanking currentRanking = PlayerRanking.LEVEL1;
+        for (final PlayerRanking ranking : PlayerRanking.values()) {
+            if (ranking.getScore() > score) {
+                return currentRanking;
+            }
+            currentRanking = ranking;
+        }
+        return currentRanking;
     }
 
     @Override

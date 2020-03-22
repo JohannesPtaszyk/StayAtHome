@@ -6,18 +6,23 @@ package org.wirvsvirushackathon.stayathome.model;
  */
 public enum PlayerRanking {
 
-    LEVEL1("(Fortgeschrittener) Couchtourist", 0),
-    LEVEL2("(10 Kampf) Probelieger", 600),
-    LEVEL3("(Professioneller) Sesselpupser", 3000),
-    LEVEL4("Wannabe B.e.t.t.-man", 1200),
-    LEVEL5("Senior Couchpotato", 36000),
-    LEVEL6("Master of Nichtstuing", 108000),
-    LEVEL7("Der mit der Couch tanzt", 864000),
-    LEVEL8("Held in Ausbildung", 1728000),
-    LEVEL9("Videokonferenz Model", 3456000),
-    LEVEL10("Stubenhocker", 6912000),
-    LEVEL11("Perfekter Sidekick - Superheld", 13824000),
-    LEVEL12("Superheld", 27648000);
+    LEVEL1("Couchtourist", 0),
+    LEVEL2("Fortgeschrittener Couchtourist", 3000),
+    LEVEL3("Probelieger", 6000),
+    LEVEL4("Kampf Probelieger", 12000),
+    LEVEL5("Sesselpupser", 24000),
+    LEVEL6("Professioneller Sesselpupser", 48000),
+    LEVEL7("Wannabe B.e.t.t.-man", 96000),
+    LEVEL8("B.e.t.t.-man", 192000),
+    LEVEL9("Couchpotato", 384000),
+    LEVEL10("Senior Couchpotato", 768000),
+    LEVEL11("Master of Nichtstuing", 1536000),
+    LEVEL12("Der mit der Couch tanzt", 3072000),
+    LEVEL13("Held in Ausbildung", 6144000),
+    LEVEL14("Videokonferenz Model", 12288000),
+    LEVEL15("Stubenhocker", 24576000),
+    LEVEL16("Perfekter Sidekick - Superheld", 49152000),
+    LEVEL17("Superheld", 98304000);
 
     private String name;
 
