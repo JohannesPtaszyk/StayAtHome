@@ -57,6 +57,18 @@ public class LaunchFragment extends Fragment {
                     return;
                 }
 
+                TextInputEditText emailEditText = root.findViewById(R.id.eTxt_mail);
+                Editable email = emailEditText.getText();
+
+                if (email != null && email.length() != 0) {
+                    String emailString = email.toString();
+                    userPreferencesDataSource.setUserEmail(emailString);
+                } else {
+                    TextInputLayout tilEmail = root.findViewById(R.id.til_mail);
+                    tilEmail.setError("Bitte gib eine E-mail ein :)");
+                    return;
+                }
+
                 Navigation.findNavController(root)
                           .navigate(R.id.action_launchFragment_to_homeScreenFragment);
             });
@@ -67,7 +79,7 @@ public class LaunchFragment extends Fragment {
     public void onViewCreated(
             @NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if(!userPreferencesDataSource.getUserName().isEmpty()) {
+        if(!userPreferencesDataSource.getUserName().isEmpty() && !userPreferencesDataSource.getUserEmail().isEmpty()) {
             Navigation.findNavController(view)
                       .navigate(R.id.action_launchFragment_to_homeScreenFragment);
         }

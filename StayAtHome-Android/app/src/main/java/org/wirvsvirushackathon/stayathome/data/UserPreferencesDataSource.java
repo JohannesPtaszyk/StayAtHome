@@ -11,6 +11,7 @@ import java.util.List;
 public class UserPreferencesDataSource {
 
     private static final String KEY_USER_NAME = "KEY_USER_NAME";
+    private static final String KEY_USER_EMAIL = "KEY_USER_EMAIL";
 
     private SharedPreferences preferences;
 
@@ -24,5 +25,13 @@ public class UserPreferencesDataSource {
 
     public void setUserName(String userName) {
         preferences.edit().putString(KEY_USER_NAME, userName).apply();
+    }
+
+    public String getUserEmail() {
+        return preferences.getString(KEY_USER_EMAIL, "");
+    }
+
+    public void setUserEmail(String userEmail) {
+        preferences.edit().putString(KEY_USER_EMAIL, userEmail).apply();
     }
 }
