@@ -66,7 +66,6 @@ public class StayHomeInteractor implements LocationListener {
         );
     }
 
-    @RequiresApi(24)
     public boolean isUserAtHome() {
         return isLastLocationHome() || homeWifiManager.isConnectedToHomeWifi();
     }
@@ -84,7 +83,6 @@ public class StayHomeInteractor implements LocationListener {
         }
     }
 
-    @RequiresApi(24)
     private boolean isLastLocationHome() {
 
         final DBScan<GPSLocation> dbScan = new DBScan<>(APPROXIMATE_HOME_RADIUS_METERS, MIN_POINTS_IN_CLUSTER);
@@ -119,27 +117,22 @@ public class StayHomeInteractor implements LocationListener {
      * @param locations The collection of locations to average.
      * @return The average location.
      */
-    @RequiresApi(24)
     private GPSLocation getAverageLocation(final Collection<GPSLocation> locations) {
-        final long averageTimestamp = (long) locations.stream()
-                .mapToLong(GPSLocation::getTimestamp)
-                .average()
-                .orElseThrow(IllegalStateException::new);
 
-        final double averageLatitude = locations.stream()
-                .mapToDouble(GPSLocation::getLatitude)
-                .average()
-                .orElseThrow(IllegalStateException::new);
+        long timestampSum = 0L;
+        double latitudeSum = 0L;
+        double longitudeSum = 0L;
 
-        final double averageLongitude = locations.stream()
-                .mapToDouble(GPSLocation::getLongitude)
-                .average()
-                .orElseThrow(IllegalStateException::new);
+        for (final GPSLocation location : locations) {
+            timestampSum += location.timestamp;
+            latitudeSum += location.latitude;
+            longitudeSum += location.longitude;
+        }
 
         return new GPSLocation(
-                averageTimestamp,
-                averageLatitude,
-                averageLongitude,
+                timestampSum / locations.size(),
+                latitudeSum / locations.size(),
+                longitudeSum / locations.size(),
                 0f
         );
     }
