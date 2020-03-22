@@ -6,6 +6,26 @@
 	android:layout_height = "match_parent"
 	tools:context = ".ui.HomeFragment">
 
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id = "@+id/appCompatImageView"
+		android:layout_width = "0dp"
+		android:layout_height = "wrap_content"
+		android:scaleType = "centerCrop"
+		app:layout_constraintBottom_toBottomOf = "parent"
+		app:layout_constraintEnd_toEndOf = "parent"
+		app:layout_constraintStart_toStartOf = "parent"
+		app:layout_constraintTop_toTopOf = "parent"
+		app:srcCompat = "@drawable/ic_home_klecks_1" />
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:layout_width = "wrap_content"
+		android:layout_height = "wrap_content"
+		android:scaleType = "centerCrop"
+		app:layout_constraintBottom_toTopOf = "@+id/appCompatImageView"
+		app:layout_constraintEnd_toEndOf = "parent"
+		app:layout_constraintTop_toTopOf = "parent"
+		app:srcCompat = "@drawable/ic_home_klecks_2" />
+
 	<TextView
 		android:id = "@+id/tv_points"
 		android:layout_width = "match_parent"

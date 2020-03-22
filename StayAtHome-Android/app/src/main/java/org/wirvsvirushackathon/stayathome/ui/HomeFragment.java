@@ -12,7 +12,7 @@ import android.widget.TextView;
 import org.wirvsvirushackathon.stayathome.R;
 import org.wirvsvirushackathon.stayathome.data.PointsSharedPreferencesDataSource;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements PointsSharedPreferencesDataSource.PointUpdateCallback {
 
     private PointsSharedPreferencesDataSource pointsSharedPreferences;
     private TextView pointsView;
@@ -33,7 +33,18 @@ public class HomeFragment extends Fragment {
         this.pointsView = root.findViewById(R.id.tv_points);
         this.pointsSharedPreferences = new PointsSharedPreferencesDataSource(requireContext());
         pointsView.setText(String.valueOf(pointsSharedPreferences.getCurrentPoints()));
-        pointsSharedPreferences.addCallback(points -> pointsView.setText(String.valueOf(points)));
+        pointsSharedPreferences.addCallback(this);
         return root;
+    }
+
+    @Override
+    public void onPointsUpdated(int points) {
+        pointsView.setText(String.valueOf(points));
+    }
+
+    @Override
+    public void onDestroyView() {
+        pointsSharedPreferences.removeCallback(this);
+        super.onDestroyView();
     }
 }
