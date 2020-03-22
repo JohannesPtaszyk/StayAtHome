@@ -10,6 +10,8 @@
 
 		<item name = "android:statusBarColor">@android:color/transparent</item>
 
+		<item name = "materialButtonStyle">@style/AppTheme.Btn</item>
+
 		<item name = "materialCardViewStyle">@style/AppTheme.CardView</item>
 
 		<item name = "floatingActionButtonStyle">
@@ -60,6 +62,11 @@
 
 	<style name = "AppTheme.CardView" parent = "Widget.MaterialComponents.CardView">
 		<item name = "cardCornerRadius">16dp</item>
+	</style>
+
+	<style name = "AppTheme.Btn" parent = "Widget.MaterialComponents.Button.TextButton">
+		<item name = "android:textColor">@color/btnTextColor</item>
+		<item name = "android:backgroundTint">@color/primaryColor</item>
 	</style>
 
 </resources>

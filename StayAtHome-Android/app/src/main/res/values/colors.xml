@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name = "primaryColor">#FF0988</color>
-	<color name = "primaryLightColor">#ff5fb8</color>
-	<color name = "primaryDarkColor">#c6005b</color>
+	<color name = "primaryColor">#76DAEC</color>
+	<color name = "primaryLightColor">#ABFFFF</color>
+	<color name = "primaryDarkColor">#3EA8BA</color>
 
 	<color name = "secondaryColor">#ffa17a</color>
 	<color name = "secondaryLightColor">#ffd3a9</color>
 	<color name = "secondaryDarkColor">#c9724d</color>
 
 	<color name= "stayAtHomeBlueColor">#76DAEC</color>
+	<color name= "btnTextColor">#94000000</color>
 </resources>
