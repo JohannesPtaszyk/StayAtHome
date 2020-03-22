@@ -32,13 +32,14 @@ public interface RestDBInterface {
     Call<List<Challenges>> getChallenges();
 
 
+
     @GET("appusers/{id}")
     @Headers({
             "x-apikey: 93f0d1cfad5791c5d04bb8a85ceee8810b78a",
             "Content-Type: application/json",
             "cache-control:no-cache"
     })
-    Call<User> getUserByID(@Path("id") String id);
+    Call<List<User>> getUserByID(@Path("id") String id);
 
     @GET("appusers/{id}")
     @Headers({

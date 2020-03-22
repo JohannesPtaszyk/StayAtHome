@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         showLogoThreeSecondsThenShowAppContent();
         checkPermissionAndStartService();
         setUpNavigation();
+
     }
 
     private void showLogoThreeSecondsThenShowAppContent() {

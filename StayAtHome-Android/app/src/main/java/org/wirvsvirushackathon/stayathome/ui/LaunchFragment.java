@@ -162,8 +162,9 @@ public class LaunchFragment extends Fragment {
             UserManager.SyncWithDB(userPreferencesDataSource.getUserDatabaseID()); // get the details from db and sync with user object
             Navigation.findNavController(view)
                       .navigate(R.id.action_launchFragment_to_homeScreenFragment);
-
         }
+        else
+            UserManager.SyncWithDB(userPreferencesDataSource.getUserDatabaseID());
 
     }
 }

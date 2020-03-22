@@ -34,10 +34,10 @@ public class UserManager {
 
         Log.d(UserManager.class.getSimpleName(),"Sync User with Database by uuid="+uuid);
 
-        Call<User> getUser = ServerCommunicationManager.getDbInterface().getUserByID(uuid);
-        Call<List<User>> getUsers = ServerCommunicationManager.getDbInterface().getUsersByID(uuid);
 
-        getUsers.enqueue(new Callback<List<User>>() {
+        Call <List<User>> getUser = ServerCommunicationManager.getDbInterface().getUserByID(uuid);
+
+        getUser.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
 
@@ -46,10 +46,10 @@ public class UserManager {
                     Log.e(UserManager.class.getSimpleName(),"Response not successfull "+response.message());
                     return;
                 }
-
+                Log.e(UserManager.class.getSimpleName(),"Response asda successfull "+response.body().size());
                 for(User u : response.body()){
 
-                    Log.d(UserManager.class.getSimpleName(),u.name);
+                    Log.d(UserManager.class.getSimpleName(),u.toString());
 
                 }
 
@@ -62,28 +62,6 @@ public class UserManager {
         });
 
 
-        /*getUser.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-
-                if(!response.isSuccessful())
-                {
-                    Log.e(UserManager.class.getSimpleName(),"Response not successfull "+response);
-                }
-
-                UserManager.user = response.body();
-
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-
-                Log.e(UserManager.class.getSimpleName(),t.getMessage());
-                Log.e(UserManager.class.getSimpleName(),t.toString());
-
-            }
-        });
-        */
         if(UserManager.user!=null)
         UserManager.user.dbID = uuid;
 

@@ -81,7 +81,10 @@ public class HomeFragment extends Fragment implements PointsSharedPreferencesDat
         this.userNameView.setText(myUserPrefSource.getUserName());
         this.userStatusView = root.findViewById(R.id.tv_userStatus);
 
-        userStatusView.setText(computePlayerRankingFromScore(UserManager.user.motionscore).getName());
+        if(UserManager.user == null && userPreferencesDataSource.getUserDatabaseID()!=null)
+            UserManager.SyncWithDB(userPreferencesDataSource.getUserDatabaseID());
+        else
+            userStatusView.setText(computePlayerRankingFromScore(UserManager.user.motionscore).getName());
 
         return root;
     }
@@ -91,7 +94,7 @@ public class HomeFragment extends Fragment implements PointsSharedPreferencesDat
         pointsView.setText(String.valueOf(points));
         userStatusView.setText(computePlayerRankingFromScore(points).getName());
 
-        Log.d(getClass().getSimpleName(),userPreferencesDataSource.getUserDatabaseID());
+
 
         // Make sure the user is up to date
         if(userPreferencesDataSource.getUserDatabaseID() == null){
@@ -99,6 +102,10 @@ public class HomeFragment extends Fragment implements PointsSharedPreferencesDat
             Log.e(HomeFragment.class.getSimpleName(),"Cant update motionscore. No UUID provided");
             return;
         }
+        Log.d(getClass().getSimpleName(),userPreferencesDataSource.getUserDatabaseID());
+        if(UserManager.user==null)
+            return;
+        Log.d(getClass().getSimpleName(),"DANACh");
         // Synchronize with Database
         UserManager.user.motionscore=points;
 
