@@ -1,16 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.SelectWifiFragment">
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
+    <!--com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/selectWifi_activateWifi"
         android:layout_width="303dp"
         android:layout_height="85dp"
         android:text="Ja das ist mein WLAN"
         tools:layout_editor_absoluteX="54dp"
-        tools:layout_editor_absoluteY="586dp" />
+        tools:layout_editor_absoluteY="586dp" /-->
 
-</FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/wifi_deco"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        app:srcCompat="@drawable/ic_wifi_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="0dp" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textView_wlan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="0dp"
+        android:text="Aber bist du auch im WLAN?"
+        android:textColor="#000000"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@id/textView_wlan_sup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wifi_deco"
+        app:layout_constraintHorizontal_bias="0.0" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textView_wlan_sup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center"
+        android:padding="50dp"
+        android:text="Je länger du mit deinem WLAN verbunden bist, desto besser das Karma. Bist du richtig verbunden?"
+        android:textColor="#000000"
+        app:layout_constraintTop_toBottomOf="@id/textView_wlan"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/selectWifi_activateWifi"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="Das ist mein WLAN"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView_wlan_sup" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

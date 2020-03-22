@@ -12,11 +12,16 @@ class MainViewController: UIViewController, GameDelegate {
     @IBOutlet weak var scoreDescription: UILabel!
     
     var gameCoordinator: GameCoordinator?
+    var imagePicker: ImagePicker!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        imagePicker = ImagePicker(presentationController: self, delegate: self)
+        
         userImageView.layer.cornerRadius = userImageView.bounds.height / 2
+        userImageView.isUserInteractionEnabled = true
+        userImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(editProfilePicture)))
         
         userNameLabel.text = gameCoordinator?.user?.username
         userImageView.image = gameCoordinator?.user?.image
@@ -33,6 +38,10 @@ class MainViewController: UIViewController, GameDelegate {
         scoreLabel.text = String(user.score)
 
         scoreDescription.text = gameCoordinator?.game.generateRandomCheer()
+    }
+    
+    @objc func editProfilePicture() {
+        imagePicker.present(from: view)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -81,4 +90,13 @@ class MainViewController: UIViewController, GameDelegate {
         leaderBoardViewController.modalPresentationStyle = .fullScreen
         present(leaderBoardViewController, animated: true, completion: nil)
     }
+}
+
+extension MainViewController: ImagePickerDelegate {
+    func didSelect(image: UIImage?) {
+        userImageView.image = image
+        gameCoordinator?.user?.image = image
+        gameCoordinator?.saveUser()
+    }
+    
 }

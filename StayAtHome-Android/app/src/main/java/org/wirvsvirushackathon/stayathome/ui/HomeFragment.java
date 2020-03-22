@@ -81,6 +81,7 @@ public class HomeFragment extends Fragment implements PointsSharedPreferencesDat
         this.userNameView.setText(myUserPrefSource.getUserName());
         this.userStatusView = root.findViewById(R.id.tv_userStatus);
 
+        userStatusView.setText(computePlayerRankingFromScore(UserManager.user.motionscore).getName());
 
         return root;
     }
