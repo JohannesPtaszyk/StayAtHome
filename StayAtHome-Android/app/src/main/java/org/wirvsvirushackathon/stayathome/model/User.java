@@ -7,24 +7,24 @@ public class User {
 
     public int id;
 
+    @SerializedName("email")
+    public final String email;
+
     @SerializedName("name")
     public final String name;
 
-    @SerializedName("email")
-    public final String email;
+    @SerializedName("rank")
+    public final String rank;
 
     @SerializedName("motionscore")
     public final int motionscore;
 
-    @SerializedName("rank")
-    public final int rank;
 
 
-    public User(String name, String email, int motionscore, int rank) {
-        this.name = name;
+    public User(String email, int motionscore, String name, String rank) {
         this.email = email;
         this.motionscore = motionscore;
         this.rank = rank;
+        this.name = name;
     }
-
 }
