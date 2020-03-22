@@ -8,45 +8,61 @@
 
 	<com.google.android.material.button.MaterialButton
 		android:id="@+id/btn_start"
-		android:layout_width="322dp"
+		android:layout_width="0dp"
 		android:layout_height="80dp"
+		android:layout_marginStart="32dp"
+		android:layout_marginEnd="32dp"
 		android:text="Auf gehts du Lauch"
 		android:textSize="24sp"
 		app:backgroundTint="#FB0076"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/til_mail"
 		app:layout_constraintVertical_bias="0.96" />
 
-	<EditText
+	<com.google.android.material.textfield.TextInputLayout
+		android:layout_marginTop="32dp"
+		android:id="@+id/til_mail"
+		android:layout_width = "0dp"
+		android:layout_height = "wrap_content"
+		android:layout_marginStart="32dp"
+		android:layout_marginEnd="32dp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/til_name"
+		android:hint="Gib mal deine Mail...">
+
+	<com.google.android.material.textfield.TextInputEditText
 		android:id="@+id/eTxt_mail"
-		android:layout_width="315dp"
-		android:layout_height="56dp"
-		android:layout_marginBottom="150dp"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
 		android:ems="10"
 		android:inputType="textEmailAddress"
-		android:text="Gib mal deine Mail..."
-		android:textSize="20sp"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent"
-		app:layout_constraintVertical_bias="0.65999997" />
+		android:textSize="20sp" />
+	</com.google.android.material.textfield.TextInputLayout>
 
-	<EditText
-		android:id="@+id/eTxt_Name"
-		android:layout_width="317dp"
-		android:layout_height="62dp"
-		android:ems="10"
-		android:inputType="textPersonName"
-		android:text="Wie heisst du?"
-		android:textSize="20sp"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent"
-		app:layout_constraintVertical_bias="0.35000002" />
+	<com.google.android.material.textfield.TextInputLayout
+		android:id = "@+id/til_name"
+		android:layout_width = "0dp"
+		android:layout_height = "wrap_content"
+		android:layout_marginStart="32dp"
+		android:layout_marginEnd="32dp"
+		android:hint = "Wie heisst du?"
+		app:layout_constraintEnd_toEndOf = "parent"
+		app:layout_constraintStart_toStartOf = "parent"
+		app:layout_constraintTop_toBottomOf = "@+id/imageButton_profilePic"
+		android:layout_marginTop="64dp">
+
+		<com.google.android.material.textfield.TextInputEditText
+			android:id = "@+id/eTxt_Name"
+			android:layout_width = "match_parent"
+			android:layout_height = "wrap_content"
+			android:ems = "10"
+			android:inputType = "textPersonName"
+
+			android:textSize = "20sp" />
+	</com.google.android.material.textfield.TextInputLayout>
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/imageButton_profilePic"
@@ -54,11 +70,11 @@
 		android:layout_height="wrap_content"
 		app:srcCompat="@drawable/ic_home"
 		android:contentDescription="Profilbild auswählen"
-		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent"
-		app:layout_constraintVertical_bias="0.07999998" />
+		android:layout_marginTop="32dp"
+		android:background="@android:color/darker_gray"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
