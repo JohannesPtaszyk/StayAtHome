@@ -2,8 +2,11 @@ package org.wirvsvirushackathon.stayathome.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Location;
 
 import androidx.preference.PreferenceManager;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +15,7 @@ public class UserPreferencesDataSource {
 
     private static final String KEY_USER_NAME = "KEY_USER_NAME";
     private static final String KEY_USER_EMAIL = "KEY_USER_EMAIL";
+    private static final String KEY_USER_LOCATION= "KEY_USER_LOCATION";
 
     private SharedPreferences preferences;
 
@@ -33,5 +37,13 @@ public class UserPreferencesDataSource {
 
     public void setUserEmail(String userEmail) {
         preferences.edit().putString(KEY_USER_EMAIL, userEmail).apply();
+    }
+
+    public Location getHomeLocation() {
+        return new Gson().fromJson(preferences.getString(KEY_USER_LOCATION, ""), Location.class);
+    }
+
+    public void setUserHomeLocation(Location homeLocation) {
+        preferences.edit().putString(KEY_USER_LOCATION, new Gson().toJson(homeLocation)).apply();
     }
 }

@@ -25,7 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class ServerCommunicationManager {
 
-    private static Retrofit retrofit;
+    private static Retrofit retrofit = getRetrofitInstance();
     private static RestDBInterface dbInterface;
     private static final String BASE_URL = "https://stayathome-a828.restdb.io/rest/";
     private SharedPreferences preferences;
