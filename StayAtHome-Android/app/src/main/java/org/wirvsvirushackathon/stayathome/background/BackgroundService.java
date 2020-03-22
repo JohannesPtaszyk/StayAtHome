@@ -32,6 +32,10 @@ import org.wirvsvirushackathon.stayathome.model.UserManager;
 
 import java.util.concurrent.TimeUnit;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * The location service is responsible for collecting location data of the user.
  */
@@ -83,11 +87,20 @@ public class BackgroundService extends Service {
         serverCommunicationManager = new ServerCommunicationManager(this);
         serverCommunicationManager.InitializeRetroFitBuilder();
 
+        userManager = new UserManager();
+
         PointsDataSource
                 pointsDataSource = new PointsSharedPreferencesDataSource(this);
         PointsRepository
                 pointsRepository = new PointsRepository(pointsDataSource);
         this.pointsManager = new PointsManager(pointsRepository);
+
+
+
+
+
+
+
     }
 
     private boolean isLocationPermissionGranted() {

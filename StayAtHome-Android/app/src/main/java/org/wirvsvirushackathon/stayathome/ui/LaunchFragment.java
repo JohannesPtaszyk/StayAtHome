@@ -136,6 +136,10 @@ public class LaunchFragment extends Fragment {
                 if(UserManager.user == null)
                     UserManager.user = new User(userPreferencesDataSource.getUserEmail(),userPreferencesDataSource.getUserName());
 
+                UserManager.SyncWithDB(); // get the details from db and sync with user object
+
+
+
                 // Switch to next View
                 Navigation.findNavController(root)
                           .navigate(R.id.action_launchFragment_to_homeScreenFragment);
@@ -155,14 +159,12 @@ public class LaunchFragment extends Fragment {
 
             if(UserManager.user == null)
                 UserManager.user = new User(userPreferencesDataSource.getUserEmail(),userPreferencesDataSource.getUserName());
+            UserManager.SyncWithDB(); // get the details from db and sync with user object
 
             Navigation.findNavController(view)
                       .navigate(R.id.action_launchFragment_to_homeScreenFragment);
 
         }
-
-
-
 
     }
 }

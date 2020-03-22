@@ -18,10 +18,16 @@ import android.widget.TextView;
 
 import org.wirvsvirushackathon.stayathome.R;
 import org.wirvsvirushackathon.stayathome.data.PointsSharedPreferencesDataSource;
+import org.wirvsvirushackathon.stayathome.data.User;
 import org.wirvsvirushackathon.stayathome.model.HomeWifiManager;
+import org.wirvsvirushackathon.stayathome.model.ServerCommunicationManager;
 import org.wirvsvirushackathon.stayathome.model.UserManager;
 
 import java.util.Date;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeFragment extends Fragment implements PointsSharedPreferencesDataSource.PointUpdateCallback {
 
@@ -57,9 +63,26 @@ public class HomeFragment extends Fragment implements PointsSharedPreferencesDat
     public void onPointsUpdated(int points) {
         pointsView.setText(String.valueOf(points));
 
-        // Update Remote Database
+        // Synchronize with Database
+        UserManager.user.motionscore = points;
 
-        Log.d(this.getClass().getName(),UserManager.user.name);
+        Call<User> updateUserCall = ServerCommunicationManager.getDbInterface().CreateUser(UserManager.user);
+        updateUserCall.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+
+                if(!response.isSuccessful()){
+                    //TODO: error handling
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
 
 
     }

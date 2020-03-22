@@ -12,13 +12,15 @@ public class User {
     public final String email;
 
     @SerializedName("name")
-    public final String name;
+    public String name;
 
     @SerializedName("rank")
-    public final String rank;
+    public String rank;
 
     @SerializedName("motionscore")
-    public final int motionscore;
+    public int motionscore;
+
+
 
 
 

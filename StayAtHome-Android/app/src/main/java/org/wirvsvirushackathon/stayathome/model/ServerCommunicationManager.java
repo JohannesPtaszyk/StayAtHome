@@ -47,7 +47,6 @@ public class ServerCommunicationManager {
             Log.d(this.getClass().getName(),"Generated Retrofit DB Interface");
             getDbInterface();
         }
-
     }
 
     public static RestDBInterface getDbInterface(){
@@ -83,25 +82,9 @@ public class ServerCommunicationManager {
     }
 
 
-    public static void GetHighScore(int maxValues){
-        //TODO: implement
-    }
 
-    public static void GetUserScore(int userID){
-        //TODO: implement
-    }
-
-    public static void IncrementUserScore(int userID){
-        //TODO: implement
-    }
-
-    public static void GetUserRank(int userID){
-        //TODO: implement
-    }
-
-
-
-    public static void GetAllUsers(){
+    //TODO: Auslagern in fragment falls überhaupt genutzt
+    public  void GetAllUsers(){
 
 
         Call<List<User>> userGetCall =  dbInterface.getUsers();

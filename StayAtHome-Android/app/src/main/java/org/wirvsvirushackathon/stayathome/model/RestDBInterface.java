@@ -11,6 +11,7 @@ import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -45,5 +46,16 @@ public interface RestDBInterface {
             "cache-control:no-cache"
     })
     Call<User> CreateUser(@Body User user);
+
+
+    @PUT("appusers")
+    @Headers({
+            "x-apikey: 93f0d1cfad5791c5d04bb8a85ceee8810b78a",
+            "Content-Type: application/json",
+            "cache-control:no-cache"
+    })
+    Call<Void> UpdateUser(@Body User user);
+
+
 
 }

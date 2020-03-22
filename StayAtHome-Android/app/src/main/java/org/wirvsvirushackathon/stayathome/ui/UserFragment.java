@@ -69,7 +69,6 @@ public class UserFragment extends Fragment {
     public void onStart() {
 
         getHighscoreListe();
-
         super.onStart();
     }
 
