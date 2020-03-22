@@ -66,13 +66,44 @@
 		android:id = "@+id/imageButton_profilePic"
 		android:layout_width = "wrap_content"
 		android:layout_height = "wrap_content"
-		android:layout_marginTop = "32dp"
-		android:background = "@android:color/darker_gray"
+		android:layout_marginTop = "0dp"
 		android:contentDescription = "Profilbild auswählen"
 		app:layout_constraintEnd_toEndOf = "parent"
 		app:layout_constraintStart_toStartOf = "parent"
 		app:layout_constraintTop_toTopOf = "parent"
-		app:srcCompat = "@drawable/ic_home" />
+		app:srcCompat = "@drawable/ic_launcher_logo" />
+
+	<com.google.android.material.textview.MaterialTextView
+		android:id="@+id/textView_launcher"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="32dp"
+		android:layout_marginEnd="32dp"
+		android:gravity="center"
+		android:text="Anmelden"
+		android:textColor="#000000"
+		android:textSize="30dp"
+		android:textStyle="bold"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.0"
+		app:layout_constraintStart_toStartOf="parent"
+		tools:layout_editor_absoluteY="293dp" />
+
+	<com.google.android.material.textview.MaterialTextView
+		android:id="@+id/textView_launcher_sup"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="32dp"
+		android:layout_marginEnd="32dp"
+		android:gravity="center"
+		android:padding="20dp"
+		android:text="und sofort loslegen"
+		android:textColor="#000000"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.0"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintBottom_toTopOf="@id/til_name"
+		app:layout_constraintTop_toBottomOf="@id/textView_launcher" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
