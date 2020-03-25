@@ -58,7 +58,7 @@
 		732DA81F2427AB8800417BD3 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		732DA8222427B81300417BD3 /* LightRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightRoundButton.swift; sourceTree = "<group>"; };
 		732DA8242427B8A500417BD3 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		7390065824263E0E00B9EEC5 /* StayAtHome-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "StayAtHome-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7390065824263E0E00B9EEC5 /* Stay@Home.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stay@Home.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7390065B24263E0E00B9EEC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7390066224263E0E00B9EEC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7390066424263E0F00B9EEC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -150,7 +150,7 @@
 		7390065924263E0E00B9EEC5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7390065824263E0E00B9EEC5 /* StayAtHome-iOS.app */,
+				7390065824263E0E00B9EEC5 /* Stay@Home.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -161,7 +161,7 @@
 				732DA80D2427594800417BD3 /* Resources */,
 				732DA7FE24272ECB00417BD3 /* Onboarding */,
 				732DA7FB24272AB700417BD3 /* Util */,
-				739006912427249C00B9EEC5 /* Managers */,
+				739006912427249C00B9EEC5 /* BusinessLogic */,
 				7390068E24269BDD00B9EEC5 /* Main */,
 				732DA8212427B7F100417BD3 /* Custom Views */,
 				7390066F24264D0A00B9EEC5 /* StayAtHome-iOS.entitlements */,
@@ -191,7 +191,7 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		739006912427249C00B9EEC5 /* Managers */ = {
+		739006912427249C00B9EEC5 /* BusinessLogic */ = {
 			isa = PBXGroup;
 			children = (
 				7390067324266C4500B9EEC5 /* ManagerProvider.swift */,
@@ -200,7 +200,7 @@
 				739006962427251300B9EEC5 /* LocationManager.swift */,
 				732DA801242734CB00417BD3 /* GameCoordinator.swift */,
 			);
-			path = Managers;
+			path = BusinessLogic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,7 +220,7 @@
 			);
 			name = "StayAtHome-iOS";
 			productName = "StayAtHome-iOS";
-			productReference = 7390065824263E0E00B9EEC5 /* StayAtHome-iOS.app */;
+			productReference = 7390065824263E0E00B9EEC5 /* Stay@Home.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -453,7 +453,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "wvv.StayAtHome-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Stay@Home";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -475,7 +475,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "wvv.StayAtHome-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Stay@Home";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

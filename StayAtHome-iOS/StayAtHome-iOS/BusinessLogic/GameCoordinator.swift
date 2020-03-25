@@ -34,7 +34,7 @@ class GameCoordinator {
     }
     
     func presentGameFromOnboarding(withUserName userName: String, email: String, userImage: UIImage?, wifiName: String) {
-        user = User(username: userName, email: email, score: 0)
+        user = User(uuid: UUID() ,username: userName, email: email, score: 0)
         user?.wifiName = wifiName
         user?.image = userImage
         

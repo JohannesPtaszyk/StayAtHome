@@ -7,6 +7,7 @@ struct Constants {
     }
     
     struct User {
+        static let uuidKey = "User.UUID"
         static let usernameKey = "User.Username"
         static let emailKey = "User.Email"
         static let scoreKey = "User.Score"

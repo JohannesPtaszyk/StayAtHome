@@ -36,6 +36,7 @@ enum Level: Int {
 }
 
 class User {
+    var uuid: UUID
     var username: String
     var email: String
     var score: Int
@@ -43,7 +44,8 @@ class User {
     var wifiName: String?
     var level: Level = .dayfly
     
-    init(username: String, email: String, score: Int) {
+    init(uuid: UUID, username: String, email: String, score: Int) {
+        self.uuid = uuid
         self.username = username
         self.email = email
         self.score = score
@@ -60,10 +62,12 @@ class UserDataProvider {
         
         let score = UserDefaults.standard.integer(forKey: Constants.User.scoreKey)
         
-        if let username = UserDefaults.standard.string(forKey: Constants.User.usernameKey),
-            let email = UserDefaults.standard.string(forKey: Constants.User.emailKey) {
+        if  let username = UserDefaults.standard.string(forKey: Constants.User.usernameKey),
+            let email = UserDefaults.standard.string(forKey: Constants.User.emailKey),
+            let uuidString = UserDefaults.standard.string(forKey: Constants.User.uuidKey),
+            let uuid = UUID(uuidString: uuidString) {
             
-            let user = User(username: username, email: email, score: score)
+            let user = User(uuid: uuid, username: username, email: email, score: score)
             
             user.wifiName = UserDefaults.standard.string(forKey: Constants.User.wifiName)
             
@@ -82,6 +86,7 @@ class UserDataProvider {
     }
     
     class func save(user: User) {
+        UserDefaults.standard.set(user.uuid.uuidString, forKey: Constants.User.uuidKey)
         UserDefaults.standard.set(user.score, forKey: Constants.User.scoreKey)
         UserDefaults.standard.set(user.username, forKey: Constants.User.usernameKey)
         UserDefaults.standard.set(user.email, forKey: Constants.User.emailKey)
