@@ -3,40 +3,37 @@ import UIKit
 
 
 class UserDataViewController: UIViewController, OnboardingChild {
+    
     var state: OnboardingState = .none
     var parentOnboardingViewController: OnboardingViewController?
     
-    @IBOutlet weak var usernameTextField: UITextField!
     weak var delegate: OnboardingDelegate?
-    @IBOutlet weak var userNameBackgroundView: UIView!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var emailBackgroundView: UIView!
+    
     @IBOutlet weak var userImageView: UIImageView!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var userNameRoundTextField: RoundTextField!
+    @IBOutlet weak var emailRoundTextField: RoundTextField!
+    @IBOutlet weak var scrollViewBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var emailBottomConstraint: NSLayoutConstraint!
     lazy var imagePicker = ImagePicker(presentationController: self, delegate: self)
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userNameBackgroundView.layer.cornerRadius = 22
-        emailBackgroundView.layer.cornerRadius = 22
-        
-        userNameBackgroundView.layer.borderColor = UIColor.black.cgColor
-        emailBackgroundView.layer.borderColor = UIColor.black.cgColor
-        
-        emailBackgroundView.layer.borderWidth = 2
-        userNameBackgroundView.layer.borderWidth = 2
-        
-        usernameTextField.attributedPlaceholder = NSAttributedString(string: usernameTextField.placeholder ?? "",
-                                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.black.withAlphaComponent(0.7)])
-        
-        emailTextField.attributedPlaceholder = NSAttributedString(string: emailTextField.placeholder ?? "",
-                                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.black.withAlphaComponent(0.7)])
-        
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTapped)))
+        
+        userNameRoundTextField.textField.delegate = self
+        emailRoundTextField.textField.delegate = self
         
         userImageView.isUserInteractionEnabled = true
         userImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(selectImageTapped)))
         userImageView.layer.cornerRadius = userImageView.bounds.height / 2
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     @objc func viewTapped() {
@@ -54,7 +51,7 @@ class UserDataViewController: UIViewController, OnboardingChild {
     }
     
     func checkIfIsDone() {
-        if emailTextField.text != "" && usernameTextField.text != "" {
+        if emailRoundTextField.text != "" && userNameRoundTextField.text != "" {
             state = .done
             delegate?.stateChanged(self, to: state)
         }
@@ -63,6 +60,11 @@ class UserDataViewController: UIViewController, OnboardingChild {
     @objc func selectImageTapped() {
         imagePicker.present(from: view)
     }
+    
+    func scrollToEmailTextField() {
+        self.scrollView.scrollRectToVisible(self.emailRoundTextField.frame, animated: false)
+    }
+    
 }
 
 extension UserDataViewController: ImagePickerDelegate {
@@ -70,4 +72,23 @@ extension UserDataViewController: ImagePickerDelegate {
         userImageView.image = image
     }
     
+}
+
+extension UserDataViewController: KeyboardHandling {
+
+    func keyboardStateChanged(_ state: KeyboardHandler.KeyboardDisplayType) {
+        
+    }
+    
+    func keyboardActionTriggered() {
+        scrollToEmailTextField()
+    }
+    
+}
+
+extension UserDataViewController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        checkIfIsDone()
+    }
 }

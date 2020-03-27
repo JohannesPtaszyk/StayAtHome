@@ -2,6 +2,7 @@
 import UIKit
 
 class AcceptWIFIViewController: UIViewController, OnboardingChild {
+    
     var state: OnboardingState = .none
     weak var delegate: OnboardingDelegate?
     var parentOnboardingViewController: OnboardingViewController?

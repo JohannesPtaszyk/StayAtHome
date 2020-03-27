@@ -10,6 +10,11 @@ protocol OnboardingDelegate: class {
     func stateChanged(_ viewController: UIViewController, to state: OnboardingState)
 }
 
+protocol KeyboardHandling {
+    func keyboardActionTriggered()
+    func keyboardStateChanged(_ state: KeyboardHandler.KeyboardDisplayType)
+}
+
 protocol OnboardingChild: class {
     var parentOnboardingViewController: OnboardingViewController? {get set}
     var state: OnboardingState {get set}
@@ -26,12 +31,16 @@ class OnboardingViewController: UIViewController {
     
     var pageViewController: UIPageViewController?
     
+    @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
     var gameCoordinator: GameCoordinator?
     
     var viewControllers: [UIViewController] = []
     
-    @IBOutlet weak var doneButton: UIButton!
+    
     @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
+    lazy var keyboardHandler = KeyboardHandler(constraint: bottomConstraint, view: view)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,12 +48,11 @@ class OnboardingViewController: UIViewController {
         setupViewControllers()
         
         self.pageViewController?.dataSource = self
+        self.pageViewController?.delegate = self
         self.pageViewController?.setViewControllers([viewControllers[0]], direction: .forward, animated: true, completion: nil)
         
-        pageControl.numberOfPages = viewControllers.count
+        keyboardHandler.registerNotifications()
         
-        checkIfAllScreensAreDone()
-            
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -65,27 +73,35 @@ class OnboardingViewController: UIViewController {
             child?.parentOnboardingViewController = self
         }
         
+        keyboardHandler.keyboardsHandlings = viewControllers.compactMap {$0 as? KeyboardHandling}
+        
+        pageControl.numberOfPages = viewControllers.count
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if let pageViewController = segue.destination as? UIPageViewController {
             self.pageViewController = pageViewController
         }
     }
 
-    
-    
-    @IBAction func doneButtonTapped(_ sender: Any) {
+    func checkIfAllScreensAreDone() {
+        let onboardingChildren = viewControllers.map {$0 as? OnboardingChild}
         
+        if onboardingChildren.first(where: {$0?.state != .done}) == nil {
+            finishOnboarding()
+        }
+    }
+    
+    func finishOnboarding() {
         var username: String = ""
         var email: String = ""
         var userImage: UIImage?
         var wifiName: String = ""
         
         if let userDataViewController = userDataViewController as? UserDataViewController {
-            username = userDataViewController.usernameTextField.text!
-            email = userDataViewController.emailTextField.text!
+            username = userDataViewController.userNameRoundTextField.text!
+            email = userDataViewController.emailRoundTextField.text!
             userImage = userDataViewController.userImageView.image
         }
         
@@ -94,16 +110,6 @@ class OnboardingViewController: UIViewController {
         }
         
         gameCoordinator?.presentGameFromOnboarding(withUserName: username, email: email, userImage: userImage, wifiName: wifiName)
-    }
-    
-    func checkIfAllScreensAreDone() {
-        let onboardingChildren = viewControllers.map {$0 as? OnboardingChild}
-        
-        if let _ = onboardingChildren.first(where: {$0?.state != .done}) {
-            doneButton.isHidden = true
-        } else {
-            doneButton.isHidden = false
-        }
     }
 }
 
@@ -127,7 +133,11 @@ extension OnboardingViewController: UIPageViewControllerDataSource {
         
         pageControl.currentPage = previousIndex
         
-        return viewControllers[previousIndex]
+        let previousViewController = viewControllers[previousIndex]
+        
+        previousViewController.view.endEditing(true)
+        
+        return previousViewController
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
@@ -148,7 +158,11 @@ extension OnboardingViewController: UIPageViewControllerDataSource {
         
         pageControl.currentPage = nextIndex
         
-        return viewControllers[nextIndex]
+        let nextViewController = viewControllers[nextIndex]
+        
+        nextViewController.view.endEditing(true)
+        
+        return nextViewController
     }
 }
 
@@ -157,4 +171,10 @@ extension OnboardingViewController: OnboardingDelegate {
         checkIfAllScreensAreDone()
     }
     
+}
+
+extension OnboardingViewController: UIPageViewControllerDelegate {
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        view.endEditing(true)
+    }
 }

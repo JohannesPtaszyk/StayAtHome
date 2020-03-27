@@ -26,6 +26,7 @@
 		732DA8202427AB8800417BD3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732DA81F2427AB8800417BD3 /* ImagePicker.swift */; };
 		732DA8232427B81300417BD3 /* LightRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732DA8222427B81300417BD3 /* LightRoundButton.swift */; };
 		732DA8252427B8A500417BD3 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 732DA8242427B8A500417BD3 /* Colors.xcassets */; };
+		738EDF40242B395500541FC8 /* RoundTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738EDF3F242B395500541FC8 /* RoundTextField.swift */; };
 		7390065C24263E0E00B9EEC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7390065B24263E0E00B9EEC5 /* AppDelegate.swift */; };
 		7390066324263E0E00B9EEC5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7390066124263E0E00B9EEC5 /* Main.storyboard */; };
 		7390066524263E0F00B9EEC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7390066424263E0F00B9EEC5 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		73900693242724BF00B9EEC5 /* WifiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73900692242724BF00B9EEC5 /* WifiManager.swift */; };
 		73900695242724E900B9EEC5 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73900694242724E900B9EEC5 /* Game.swift */; };
 		739006972427251300B9EEC5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739006962427251300B9EEC5 /* LocationManager.swift */; };
+		73CF5F20242DF56000B7CE40 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CF5F1F242DF56000B7CE40 /* KeyboardHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,7 @@
 		732DA81F2427AB8800417BD3 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		732DA8222427B81300417BD3 /* LightRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightRoundButton.swift; sourceTree = "<group>"; };
 		732DA8242427B8A500417BD3 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		738EDF3F242B395500541FC8 /* RoundTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundTextField.swift; sourceTree = "<group>"; };
 		7390065824263E0E00B9EEC5 /* Stay@Home.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stay@Home.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7390065B24263E0E00B9EEC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7390066224263E0E00B9EEC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -71,6 +74,7 @@
 		73900692242724BF00B9EEC5 /* WifiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WifiManager.swift; sourceTree = "<group>"; };
 		73900694242724E900B9EEC5 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		739006962427251300B9EEC5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		73CF5F1F242DF56000B7CE40 /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +94,7 @@
 			children = (
 				732DA7FC24272AC100417BD3 /* Constants.swift */,
 				732DA8032427391C00417BD3 /* UIStoryboardExtension.swift */,
+				73CF5F1F242DF56000B7CE40 /* KeyboardHandler.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -134,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				732DA8222427B81300417BD3 /* LightRoundButton.swift */,
+				738EDF3F242B395500541FC8 /* RoundTextField.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -289,6 +295,7 @@
 				732DA80A24273AA000417BD3 /* AcceptWIFIViewController.swift in Sources */,
 				732DA8202427AB8800417BD3 /* ImagePicker.swift in Sources */,
 				732DA8042427391C00417BD3 /* UIStoryboardExtension.swift in Sources */,
+				738EDF40242B395500541FC8 /* RoundTextField.swift in Sources */,
 				7390067424266C4500B9EEC5 /* ManagerProvider.swift in Sources */,
 				73900693242724BF00B9EEC5 /* WifiManager.swift in Sources */,
 				732DA8002427342800417BD3 /* OnboardingViewController.swift in Sources */,
@@ -299,6 +306,7 @@
 				732DA81324275AA400417BD3 /* ChallengesViewController.swift in Sources */,
 				739006972427251300B9EEC5 /* LocationManager.swift in Sources */,
 				732DA81724275F7E00417BD3 /* SettingsViewController.swift in Sources */,
+				73CF5F20242DF56000B7CE40 /* KeyboardHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

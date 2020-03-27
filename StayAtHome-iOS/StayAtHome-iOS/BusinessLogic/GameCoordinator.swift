@@ -33,6 +33,10 @@ class GameCoordinator {
         }
     }
     
+    func clearUserData() {
+        UserDataProvider.removeUser()
+    }
+    
     func presentGameFromOnboarding(withUserName userName: String, email: String, userImage: UIImage?, wifiName: String) {
         user = User(uuid: UUID() ,username: userName, email: email, score: 0)
         user?.wifiName = wifiName

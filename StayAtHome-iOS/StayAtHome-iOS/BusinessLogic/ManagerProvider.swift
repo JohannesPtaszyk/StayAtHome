@@ -95,6 +95,16 @@ class UserDataProvider {
         UserDefaults.standard.set(user.level.rawValue, forKey: Constants.User.level)
     }
     
+    class func removeUser() {
+        UserDefaults.standard.removeObject(forKey: Constants.User.uuidKey)
+        UserDefaults.standard.removeObject(forKey: Constants.User.scoreKey)
+        UserDefaults.standard.removeObject(forKey: Constants.User.usernameKey)
+        UserDefaults.standard.removeObject(forKey: Constants.User.emailKey)
+        UserDefaults.standard.removeObject(forKey: Constants.User.imageKey)
+        UserDefaults.standard.removeObject(forKey: Constants.User.wifiName)
+        UserDefaults.standard.removeObject(forKey: Constants.User.level)
+    }
+    
 }
 
 class ManagerProvider {

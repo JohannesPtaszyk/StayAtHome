@@ -69,6 +69,7 @@ class MainViewController: UIViewController, GameDelegate {
     @IBAction func settingsButtonTapped(_ sender: Any) {
         let settingsViewController = UIStoryboard.main.instantiateViewController(withIdentifier: Constants.Storyboards.ViewController.settings)
         settingsViewController.modalPresentationStyle = .fullScreen
+        (settingsViewController as? SettingsViewController)?.gameCoordinator = gameCoordinator
         present(settingsViewController, animated: true, completion: nil)
     }
     

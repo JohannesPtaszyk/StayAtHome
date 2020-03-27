@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,7 +21,7 @@
         <!--Main View Controller-->
         <scene sceneID="ipf-Y3-vjf">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" id="2vP-NW-xsg" customClass="MainViewController" customModule="StayAtHome_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="2vP-NW-xsg" customClass="MainViewController" customModule="Stay_Home" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XER-Fn-CXd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -181,7 +181,7 @@
         <!--Settings View Controller-->
         <scene sceneID="FRt-NT-wRZ">
             <objects>
-                <viewController storyboardIdentifier="SettingsViewController" id="6Dm-nk-JEi" customClass="SettingsViewController" customModule="StayAtHome_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsViewController" id="6Dm-nk-JEi" customClass="SettingsViewController" customModule="Stay_Home" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FKj-3o-7nT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -206,25 +206,36 @@
                                     <action selector="closeButtonTapped:" destination="6Dm-nk-JEi" eventType="touchUpInside" id="afm-Bo-hoW"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="msw-jP-HAf">
+                                <rect key="frame" x="0.0" y="59" width="320" height="509"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="9m9-db-Ryh" firstAttribute="top" secondItem="PBe-nk-LOH" secondAttribute="top" constant="14" id="5Bo-Zv-Gdg"/>
+                            <constraint firstItem="msw-jP-HAf" firstAttribute="top" secondItem="g6s-jL-AOp" secondAttribute="bottom" constant="6.5" id="9ak-LG-X9y"/>
                             <constraint firstItem="PBe-nk-LOH" firstAttribute="trailing" secondItem="g6s-jL-AOp" secondAttribute="trailing" constant="16" id="Dix-nP-ihg"/>
                             <constraint firstItem="g6s-jL-AOp" firstAttribute="centerY" secondItem="9m9-db-Ryh" secondAttribute="centerY" id="IxP-IF-sjf"/>
                             <constraint firstItem="9m9-db-Ryh" firstAttribute="centerX" secondItem="PBe-nk-LOH" secondAttribute="centerX" id="Yj6-94-YFx"/>
+                            <constraint firstItem="msw-jP-HAf" firstAttribute="trailing" secondItem="PBe-nk-LOH" secondAttribute="trailing" id="dcG-2i-a9P"/>
+                            <constraint firstItem="msw-jP-HAf" firstAttribute="bottom" secondItem="PBe-nk-LOH" secondAttribute="bottom" id="f7X-kn-DMh"/>
+                            <constraint firstItem="msw-jP-HAf" firstAttribute="leading" secondItem="PBe-nk-LOH" secondAttribute="leading" id="t48-m1-Nt2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PBe-nk-LOH"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="msw-jP-HAf" id="8Io-9l-7Un"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UcS-56-VvV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3808" y="42"/>
+            <point key="canvasLocation" x="3806.25" y="41.197183098591552"/>
         </scene>
         <!--Friends View Controller-->
         <scene sceneID="CrK-Kc-Kau">
             <objects>
-                <viewController storyboardIdentifier="FriendsViewController" id="dQL-Dw-MPF" customClass="FriendsViewController" customModule="StayAtHome_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FriendsViewController" id="dQL-Dw-MPF" customClass="FriendsViewController" customModule="Stay_Home" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OoA-ER-qfv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -266,7 +277,7 @@
         <!--Challenges View Controller-->
         <scene sceneID="Iee-JJ-V2m">
             <objects>
-                <viewController storyboardIdentifier="ChallengesViewController" id="EkX-uk-jwZ" customClass="ChallengesViewController" customModule="StayAtHome_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChallengesViewController" id="EkX-uk-jwZ" customClass="ChallengesViewController" customModule="Stay_Home" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DNZ-fF-G3b">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -308,7 +319,7 @@
         <!--Leader Board View Controller-->
         <scene sceneID="0nj-vH-SaF">
             <objects>
-                <viewController storyboardIdentifier="LeaderBoardViewController" id="2b9-Qz-QDc" customClass="LeaderBoardViewController" customModule="StayAtHome_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LeaderBoardViewController" id="2b9-Qz-QDc" customClass="LeaderBoardViewController" customModule="Stay_Home" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="M2N-T0-enF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
